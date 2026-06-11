@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mundial 2026 - Grupo D Paraguay | Calendario Completo</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Archivo', system-ui, sans-serif;
+  background: #f0f0e8;
+  color: #1a1a2e;
+}
+
+header {
+  background: linear-gradient(135deg, #003087 0%, #002060 100%);
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-family: 'Anton', sans-serif;
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+}
+
+header h1 span {
+  color: #ffd700;
+}
+
+.sub {
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+.paraguay-badge {
+  background: #d52b1e;
+  display: inline-block;
+  padding: 8px 25px;
+  border-radius: 40px;
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.horario-info {
+  background: #ffd700;
+  color: #003087;
+  padding: 8px 15px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  background: white;
+  border-bottom: 2px solid #ddd;
+  flex-wrap: wrap;
+}
+
+nav button {
+  padding: 10px 20px;
+  border: none;
+  background: #e0e0e0;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: all 0.3s;
+  font-family: 'Archivo', sans-serif;
+}
+
+nav button.act {
+  background: #003087;
+  color: white;
+}
+
+nav button.reset {
+  background: #d52b1e;
+  color: white;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.vista {
+  display: none;
+}
+
+.vista.act {
+  display: block;
+}
+
+/* Calendario Grupo D */
+.calendario-grupo-d {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+.calendario-header {
+  background: #003087;
+  color: white;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.calendario-header .flag {
+  font-size: 48px;
+}
+
+.calendario-header h2 {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.8rem;
+}
+
+.partido-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  flex-wrap: wrap;
+  gap: 15px;
+  transition: background 0.2s;
+}
+
+.partido-item:hover {
+  background: #f9f9f5;
+}
+
+.partido-item.paraguay {
+  background: #fff8e8;
+  border-left: 4px solid #d52b1e;
+}
+
+.fecha {
+  min-width: 170px;
+}
+
+.fecha .dia {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #003087;
+}
+
+.fecha .hora-local {
+  color: #666;
+  font-size: 0.7rem;
+}
+
+.fecha .hora-py {
+  color: #d52b1e;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+.fecha .hora-py span {
+  background: #ffd700;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  margin-right: 5px;
+}
+
+.equipos {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  font-weight: bold;
+  flex-wrap: wrap;
+}
+
+.equipo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 140px;
+}
+
+.equipo.par {
+  color: #d52b1e;
+}
+
+.equipo .bandera {
+  font-size: 32px;
+}
+
+.marcador {
+  min-width: 100px;
+  text-align: center;
+}
+
+.marcador input {
+  width: 55px;
+  padding: 8px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin: 0 5px;
+}
+
+.marcador input:focus {
+  outline: none;
+  border-color: #003087;
+}
+
+.estadio {
+  min-width: 150px;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.estadio .nombre-estadio {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Tabla */
+.tabla-container {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+.tabla-header {
+  background: #003087;
+  color: white;
+  padding: 15px 20px;
+  font-family: 'Anton', sans-serif;
+  font-size: 1.3rem;
+}
+
+.tabla-grupo {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-grupo th, .tabla-grupo td {
+  padding: 12px 10px;
+  text-align: center;
+}
+
+.tabla-grupo th {
+  background: #f5f5f0;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+}
+
+.tabla-grupo td:first-child {
+  text-align: left;
+}
+
+.tabla-grupo tr.clasifica {
+  background: #e8f5e9;
+}
+
+.tabla-grupo tr.paraguay-row td:first-child {
+  border-left: 4px solid #d52b1e;
+}
+
+/* Grupos */
+.grupos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px;
+}
+
+.grupo-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.grupo-titulo {
+  background: #003087;
+  color: white;
+  padding: 12px 16px;
+  font-family: 'Anton', sans-serif;
+  font-size: 1.3rem;
+}
+
+.tabla-mini {
+  width: 100%;
+  font-size: 0.8rem;
+  border-collapse: collapse;
+}
+
+.tabla-mini th, .tabla-mini td {
+  padding: 8px 6px;
+  text-align: center;
+}
+
+.tabla-mini td:first-child {
+  text-align: left;
+}
+
+.grupo-partidos {
+  border-bottom: 2px solid #eee;
+}
+
+.mini-partido {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 8px 10px;
+  border-bottom: 1px solid #f2f2ee;
+  font-size: 0.8rem;
+}
+
+.mini-partido .mp-eq {
+  flex: 1;
+}
+
+.mini-partido .mp-visit {
+  text-align: right;
+}
+
+.mini-partido input {
+  width: 40px;
+  padding: 4px;
+  text-align: center;
+  font-weight: bold;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+}
+
+.mini-partido input:focus {
+  outline: none;
+  border-color: #003087;
+}
+
+/* Eliminatorias */
+.ronda {
+  margin-bottom: 30px;
+}
+
+.ronda h3 {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  padding-left: 10px;
+  border-left: 5px solid #003087;
+}
+
+.eliminatorias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+}
+
+.elim-partido {
+  background: white;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.elim-equipo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin: 5px 0;
+  background: #f5f5f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.elim-equipo:hover {
+  background: #e0e0e0;
+}
+
+.elim-equipo.seleccionado {
+  background: #003087;
+  color: white;
+}
+
+.campeon-box {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  text-align: center;
+  padding: 30px;
+  border-radius: 16px;
+  margin-top: 30px;
+}
+
+.campeon-box .trofeo {
+  font-size: 48px;
+}
+
+.campeon-box .nombre {
+  font-family: 'Anton', sans-serif;
+  font-size: 2rem;
+  margin-top: 10px;
+}
+
+.estado {
+  text-align: center;
+  padding: 12px;
+  background: #e8f5e9;
+  margin: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #1a1a2e;
+  color: white;
+  margin-top: 40px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .partido-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  .equipos {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Mundial <span>2026</span></h1>
+  <div class="sub">Canadá · México · Estados Unidos | 11 junio - 19 julio</div>
+  <div class="paraguay-badge">🇵🇾 ¡Vamos Paraguay! 🇵🇾</div>
+  <div class="horario-info">
+    🕐 Paraguay (GMT-3) está 4 horas ADELANTE de Los Ángeles (GMT-7)
+  </div>
+</header>
+
+<nav>
+  <button class="act" data-v="calendario">📅 Grupo D · Paraguay</button>
+  <button data-v="grupos">🏆 Todos los Grupos</button>
+  <button data-v="eliminatorias">⚽ Eliminatorias</button>
+  <button class="reset" id="btnReset">🔄 Reiniciar todo</button>
+</nav>
+
+<div class="estado" id="estado">🇵🇾 Completá los resultados · Horarios en HORA PARAGUAY (GMT-3)</div>
+
+<main>
+  <section id="calendario" class="vista act">
+    <div class="calendario-grupo-d">
+      <div class="calendario-header">
+        <div class="flag">🇵🇾</div>
+        <div>
+          <h2>Grupo D · Calendario completo</h2>
+          <p>Estados Unidos · Paraguay · Australia · Turquía</p>
+          <p>✅ TODOS los horarios convertidos a <strong>HORA PARAGUAY (GMT-3)</strong></p>
+        </div>
+      </div>
+      <div id="calendarioGrupoD"></div>
+    </div>
+
+    <div class="tabla-container">
+      <div class="tabla-header">
+        📊 Tabla de posiciones - Grupo D
+      </div>
+      <div id="tablaGrupoD"></div>
+    </div>
+  </section>
+
+  <section id="grupos" class="vista">
+    <div class="grupos-grid" id="gruposContainer"></div>
+  </section>
+
+  <section id="eliminatorias" class="vista">
+    <div id="eliminatoriasContainer"></div>
+    <div class="campeon-box" id="campeonBox" style="display: none;">
+      <div class="trofeo">🏆</div>
+      <div class="nombre" id="campeonNombre"></div>
+      <p>¡Tu campeón del mundo 2026!</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>🇵🇾 Mundial 2026 - Predictor Paraguay | Hora oficial Paraguay (GMT-3)</p>
+  <p>📌 Diferencia: Paraguay está 4 horas ADELANTE de Los Ángeles (ej: 22:00 PY = 18:00 LA)</p>
+</footer>
+
+<script>
+// ==================== DATOS ====================
+const equipos = {
+  "USA": ["Estados Unidos", "🇺🇸"],
+  "PAR": ["Paraguay", "🇵🇾"],
+  "AUS": ["Australia", "🇦🇺"],
+  "TUR": ["Turquía", "🇹🇷"],
+  "MEX": ["México", "🇲🇽"], "CAN": ["Canadá", "🇨🇦"], "BRA": ["Brasil", "🇧🇷"],
+  "ARG": ["Argentina", "🇦🇷"], "FRA": ["Francia", "🇫🇷"], "GER": ["Alemania", "🇩🇪"],
+  "ESP": ["España", "🇪🇸"], "ENG": ["Inglaterra", "🏴󠁧󠁢󠁥󠁮󠁧󠁿"], "NED": ["Países Bajos", "🇳🇱"],
+  "ITA": ["Italia", "🇮🇹"], "POR": ["Portugal", "🇵🇹"], "BEL": ["Bélgica", "🇧🇪"],
+  "CRO": ["Croacia", "🇭🇷"], "SUI": ["Suiza", "🇨🇭"], "DEN": ["Dinamarca", "🇩🇰"],
+  "SEN": ["Senegal", "🇸🇳"], "MAR": ["Marruecos", "🇲🇦"], "JPN": ["Japón", "🇯🇵"],
+  "KOR": ["Corea del Sur", "🇰🇷"], "URU": ["Uruguay", "🇺🇾"], "COL": ["Colombia", "🇨🇴"],
+  "ECU": ["Ecuador", "🇪🇨"], "CHI": ["Chile", "🇨🇱"], "PER": ["Perú", "🇵🇪"],
+  "GHA": ["Ghana", "🇬🇭"], "NGA": ["Nigeria", "🇳🇬"], "KSA": ["Arabia Saudita", "🇸🇦"],
+  "IRN": ["Irán", "🇮🇷"]
+};
+
+// TODOS los partidos del GRUPO D - HORARIOS CORREGIDOS
+// REGLA: Paraguay (GMT-3) está 4 horas ADELANTE de Los Ángeles (GMT-7)
+// Ejemplo: Si en Paraguay son las 22:00, en Los Ángeles son las 18:00
+const partidosGrupoD = [
+  { 
+    id: "p1", local: "USA", visitante: "PAR", 
+    fecha: "Viernes 12 de junio", 
+    horaLocal: "18:00", ciudad: "Los Ángeles", 
+    horaPy: "22:00",
+    estadio: "SoFi Stadium"
+  },
+  { 
+    id: "p2", local: "AUS", visitante: "TUR", 
+    fecha: "Viernes 12 de junio", 
+    horaLocal: "21:00", ciudad: "Vancouver", 
+    horaPy: "01:00 (sábado 13)",
+    estadio: "BC Place"
+  },
+  { 
+    id: "p3", local: "USA", visitante: "AUS", 
+    fecha: "Viernes 19 de junio", 
+    horaLocal: "18:00", ciudad: "Seattle", 
+    horaPy: "22:00",
+    estadio: "Lumen Field"
+  },
+  { 
+    id: "p4", local: "TUR", visitante: "PAR", 
+    fecha: "Viernes 19 de junio", 
+    horaLocal: "18:00", ciudad: "San Francisco", 
+    horaPy: "22:00",
+    estadio: "Levi's Stadium"
+  },
+  { 
+    id: "p5", local: "TUR", visitante: "USA", 
+    fecha: "Jueves 25 de junio", 
+    horaLocal: "19:00", ciudad: "Los Ángeles", 
+    horaPy: "23:00",
+    estadio: "SoFi Stadium"
+  },
+  { 
+    id: "p6", local: "PAR", visitante: "AUS", 
+    fecha: "Jueves 25 de junio", 
+    horaLocal: "19:00", ciudad: "San Francisco", 
+    horaPy: "23:00",
+    estadio: "Levi's Stadium"
+  }
+];
+
+// Grupos completos
+const grupos = {
+  "A": ["MEX", "CAN", "BRA", "ARG"],
+  "B": ["FRA", "GER", "ESP", "ENG"],
+  "C": ["NED", "ITA", "POR", "BEL"],
+  "D": ["USA", "PAR", "AUS", "TUR"],
+  "E": ["CRO", "SUI", "DEN", "SEN"],
+  "F": ["MAR", "JPN", "KOR", "URU"],
+  "G": ["COL", "ECU", "PER", "CHI"],
+  "H": ["GHA", "NGA", "KSA", "IRN"]
+};
+
+partidosGrupoD.forEach(p => p.grupo = "D");
+
+// Generar partidos de otros grupos
+const todosPartidosGrupos = [...partidosGrupoD];
+for (const [grupo, equiposG] of Object.entries(grupos)) {
+  if (grupo === "D") continue;
+  for (let i = 0; i < equiposG.length; i++) {
+    for (let j = i + 1; j < equiposG.length; j++) {
+      todosPartidosGrupos.push({
+        id: `p_${grupo}_${i}_${j}`,
+        grupo: grupo,
+        local: equiposG[i],
+        visitante: equiposG[j],
+        fecha: "Junio 2026",
+        horaPy: "--:--",
+        estadio: "Por definir"
+      });
+    }
+  }
+}
+
+// Eliminatorias
+const eliminatorias = [
+  { id: "r32_1", ronda: "16avos", local: "1A", visitante: "2B" },
+  { id: "r32_2", ronda: "16avos", local: "1C", visitante: "2D" },
+  { id: "r32_3", ronda: "16avos", local: "1B", visitante: "2A" },
+  { id: "r32_4", ronda: "16avos", local: "1D", visitante: "2C" },
+  { id: "r32_5", ronda: "16avos", local: "1E", visitante: "2F" },
+  { id: "r32_6", ronda: "16avos", local: "1G", visitante: "2H" },
+  { id: "r32_7", ronda: "16avos", local: "1F", visitante: "2E" },
+  { id: "r32_8", ronda: "16avos", local: "1H", visitante: "2G" },
+  { id: "oct_1", ronda: "Octavos", local: "Wr32_1", visitante: "Wr32_2" },
+  { id: "oct_2", ronda: "Octavos", local: "Wr32_3", visitante: "Wr32_4" },
+  { id: "oct_3", ronda: "Octavos", local: "Wr32_5", visitante: "Wr32_6" },
+  { id: "oct_4", ronda: "Octavos", local: "Wr32_7", visitante: "Wr32_8" },
+  { id: "cuar_1", ronda: "Cuartos", local: "Woct_1", visitante: "Woct_2" },
+  { id: "cuar_2", ronda: "Cuartos", local: "Woct_3", visitante: "Woct_4" },
+  { id: "semi_1", ronda: "Semifinal", local: "Wcuar_1", visitante: "Wcuar_2" },
+  { id: "semi_2", ronda: "Semifinal", local: "Wcuar_3", visitante: "Wcuar_4" },
+  { id: "final", ronda: "Final", local: "Wsemi_1", visitante: "Wsemi_2" }
+];
+
+// ==================== ESTADO ====================
+let state = { scores: {}, picks: {} };
+
+try {
+  const saved = localStorage.getItem("mundial2026_py");
+  if (saved) state = JSON.parse(saved);
+} catch(e) {}
+
+function saveState() {
+  localStorage.setItem("mundial2026_py", JSON.stringify(state));
+}
+
+// ==================== LÓGICA ====================
+function calcularTablaGrupo(grupo) {
+  const equiposGrupo = grupos[grupo];
+  if (!equiposGrupo) return [];
+  
+  const tabla = {};
+  equiposGrupo.forEach(eq => {
+    tabla[eq] = { eq, pj: 0, gf: 0, gc: 0, pts: 0 };
+  });
+  
+  const partidosGrupo = todosPartidosGrupos.filter(p => p.grupo === grupo);
+  
+  partidosGrupo.forEach(p => {
+    const score = state.scores[p.id];
+    if (score && score[0] != null && score[1] != null) {
+      tabla[p.local].pj++;
+      tabla[p.local].gf += score[0];
+      tabla[p.local].gc += score[1];
+      tabla[p.visitante].pj++;
+      tabla[p.visitante].gf += score[1];
+      tabla[p.visitante].gc += score[0];
+      
+      if (score[0] > score[1]) tabla[p.local].pts += 3;
+      else if (score[1] > score[0]) tabla[p.visitante].pts += 3;
+      else { tabla[p.local].pts += 1; tabla[p.visitante].pts += 1; }
+    }
+  });
+  
+  return Object.values(tabla).sort((a,b) => {
+    if (a.pts !== b.pts) return b.pts - a.pts;
+    const dgA = a.gf - a.gc;
+    const dgB = b.gf - b.gc;
+    if (dgA !== dgB) return dgB - dgA;
+    return b.gf - a.gf;
+  });
+}
+
+function grupoCompleto(grupo) {
+  const partidosG = todosPartidosGrupos.filter(p => p.grupo === grupo);
+  return partidosG.length > 0 && partidosG.every(p => {
+    const s = state.scores[p.id];
+    return s && s[0] != null && s[1] != null;
+  });
+}
+
+function obtenerClasificados(grupo) {
+  const tabla = calcularTablaGrupo(grupo);
+  return { primero: tabla[0]?.eq, segundo: tabla[1]?.eq };
+}
+
+function resolverEquipo(ref) {
+  if (!ref) return null;
+  if (ref.startsWith("W")) return state.picks[ref.substring(1)];
+  if (ref.length >= 2 && ref[0] >= '1' && ref[0] <= '9') {
+    if (!grupoCompleto(ref[1])) return null;
+    const clasif = obtenerClasificados(ref[1]);
+    return ref[0] === "1" ? clasif.primero : clasif.segundo;
+  }
+  return ref;
+}
+
+function renderCalendarioGrupoD() {
+  const container = document.getElementById("calendarioGrupoD");
+  
+  container.innerHTML = partidosGrupoD.map(p => {
+    const score = state.scores[p.id] || [null, null];
+    const esParaguay = p.local === "PAR" || p.visitante === "PAR";
+    
+    return `
+      <div class="partido-item ${esParaguay ? 'paraguay' : ''}">
+        <div class="fecha">
+          <div class="dia">📅 ${p.fecha}</div>
+          <div class="hora-local">📍 ${p.ciudad} · ${p.horaLocal} (hora local)</div>
+          <div class="hora-py"><span>🇵🇾 PY</span> ${p.horaPy}</div>
+        </div>
+        <div class="equipos">
+          <div class="equipo ${p.local === 'PAR' ? 'par' : ''}">
+            <span class="bandera">${equipos[p.local]?.[1] || "🏁"}</span>
+            <span>${equipos[p.local]?.[0] || p.local}</span>
+          </div>
+          <div class="marcador">
+            <input type="number" min="0" max="20" value="${score[0] !== null ? score[0] : ""}" data-partido="${p.id}" data-eslocal="1" placeholder="-">
+            <span>-</span>
+            <input type="number" min="0" max="20" value="${score[1] !== null ? score[1] : ""}" data-partido="${p.id}" data-eslocal="0" placeholder="-">
+          </div>
+          <div class="equipo ${p.visitante === 'PAR' ? 'par' : ''}">
+            <span>${equipos[p.visitante]?.[0] || p.visitante}</span>
+            <span class="bandera">${equipos[p.visitante]?.[1] || "🏁"}</span>
+          </div>
+        </div>
+        <div class="estadio">
+          <div class="nombre-estadio">🏟️ ${p.estadio}</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+  
+  attachScoreListeners(container);
+}
+
+function attachScoreListeners(container) {
+  container.querySelectorAll("input[data-partido]").forEach(inp => {
+    inp.addEventListener("change", () => {
+      const partidoId = inp.dataset.partido;
+      const esLocal = inp.dataset.eslocal === "1";
+      const valor = inp.value === "" ? null : Math.max(0, Math.min(20, parseInt(inp.value) || 0));
+      
+      if (!state.scores[partidoId]) state.scores[partidoId] = [null, null];
+      state.scores[partidoId][esLocal ? 0 : 1] = valor;
+      
+      if (state.scores[partidoId][0] === null && state.scores[partidoId][1] === null) {
+        delete state.scores[partidoId];
+      }
+      
+      saveState();
+      renderAll();
+    });
+  });
+}
+
+function renderAll() {
+  renderCalendarioGrupoD();
+  renderTablaGrupoD();
+  renderGrupos();
+  renderEliminatorias();
+}
+
+function renderTablaGrupoD() {
+  const tabla = calcularTablaGrupo("D");
+  const container = document.getElementById("tablaGrupoD");
+  
+  container.innerHTML = `
+    <table class="tabla-grupo">
+      <thead>
+        <tr><th>Pos</th><th>Equipo</th><th>PJ</th><th>GF</th><th>GC</th><th>DG</th><th>Pts</th></tr>
+      </thead>
+      <tbody>
+        ${tabla.map((t, idx) => `
+          <tr class="${idx < 2 ? 'clasifica' : ''} ${t.eq === 'PAR' ? 'paraguay-row' : ''}">
+            <td style="text-align:center"><b>${idx + 1}</b></td>
+            <td style="text-align:left">${equipos[t.eq]?.[1] || ""} <b>${equipos[t.eq]?.[0] || t.eq}</b></td>
+            <td style="text-align:center">${t.pj}</td>
+            <td style="text-align:center">${t.gf}</td>
+            <td style="text-align:center">${t.gc}</td>
+            <td style="text-align:center">${t.gf - t.gc > 0 ? '+' : ''}${t.gf - t.gc}</td>
+            <td style="text-align:center"><b style="font-size:1.2rem;">${t.pts}</b></td>
+          </tr>
+        `).join("")}
+      </tbody>
+    </table>
+    <div style="padding: 12px; background: #f5f5f0; text-align: center;">
+      ✅ <strong>Clasifican a 16avos de final:</strong> 1° y 2° del grupo
+    </div>
+  `;
+}
+
+function renderGrupos() {
+  const container = document.getElementById("gruposContainer");
+  container.innerHTML = Object.keys(grupos).map(g => {
+    const tabla = calcularTablaGrupo(g);
+    const partidosG = todosPartidosGrupos.filter(p => p.grupo === g);
+    return `
+      <div class="grupo-card">
+        <div class="grupo-titulo">Grupo ${g}${grupoCompleto(g) ? " ✅" : ""}</div>
+        <div class="grupo-partidos">
+          ${partidosG.map(p => {
+            const score = state.scores[p.id] || [null, null];
+            return `
+              <div class="mini-partido">
+                <span class="mp-eq">${equipos[p.local]?.[1] || ""} ${equipos[p.local]?.[0] || p.local}</span>
+                <span class="mp-score">
+                  <input type="number" min="0" max="20" value="${score[0] ?? ""}" data-partido="${p.id}" data-eslocal="1" placeholder="-">
+                  -
+                  <input type="number" min="0" max="20" value="${score[1] ?? ""}" data-partido="${p.id}" data-eslocal="0" placeholder="-">
+                </span>
+                <span class="mp-eq mp-visit">${equipos[p.visitante]?.[0] || p.visitante} ${equipos[p.visitante]?.[1] || ""}</span>
+              </div>`;
+          }).join("")}
+        </div>
+        <table class="tabla-mini">
+          <thead><tr><th>Equipo</th><th>Pts</th><th>DG</th></tr></thead>
+          <tbody>${tabla.map((t, idx) => `
+            <tr ${idx < 2 ? 'style="background:#e8f5e9"' : ''}>
+              <td>${equipos[t.eq]?.[1] || ""} ${equipos[t.eq]?.[0]?.substring(0,12) || t.eq}</td>
+              <td style="text-align:center"><b>${t.pts}</b></td>
+              <td style="text-align:center">${t.gf - t.gc}</td>
+            </tr>
+          `).join("")}</tbody>
+        </table>
+      </div>
+    `;
+  }).join("");
+  attachScoreListeners(container);
+}
+
+function renderEliminatorias() {
+  const container = document.getElementById("eliminatoriasContainer");
+  const rondas = { "16avos": [], "Octavos": [], "Cuartos": [], "Semifinal": [], "Final": [] };
+  
+  eliminatorias.forEach(e => { if (rondas[e.ronda]) rondas[e.ronda].push(e); });
+  
+  container.innerHTML = Object.entries(rondas).map(([nombre, partidos]) => {
+    if (partidos.length === 0) return "";
+    return `
+      <div class="ronda">
+        <h3>${nombre}</h3>
+        <div class="eliminatorias-grid">
+          ${partidos.map(elim => {
+            const localEq = resolverEquipo(elim.local);
+            const visitEq = resolverEquipo(elim.visitante);
+            const ganador = state.picks[elim.id];
+            return `
+              <div class="elim-partido">
+                <div class="elim-equipo ${ganador === localEq ? 'seleccionado' : ''}" data-partido="${elim.id}" data-equipo="${localEq || ''}">
+                  ${localEq ? (equipos[localEq]?.[1] || "🏁") + " " + (equipos[localEq]?.[0] || localEq) : "❓ Por definir"}
+                </div>
+                <div class="elim-equipo ${ganador === visitEq ? 'seleccionado' : ''}" data-partido="${elim.id}" data-equipo="${visitEq || ''}">
+                  ${visitEq ? (equipos[visitEq]?.[1] || "🏁") + " " + (equipos[visitEq]?.[0] || visitEq) : "❓ Por definir"}
+                </div>
+              </div>
+            `;
+          }).join("")}
+        </div>
+      </div>
+    `;
+  }).join("");
+  
+  container.querySelectorAll(".elim-equipo").forEach(el => {
+    el.addEventListener("click", () => {
+      const equipo = el.dataset.equipo;
+      const partidoId = el.dataset.partido;
+      if (!equipo) return;
+      if (state.picks[partidoId] === equipo) delete state.picks[partidoId];
+      else state.picks[partidoId] = equipo;
+      saveState();
+      renderEliminatorias();
+      
+      const campeon = state.picks["final"];
+      const campeonBox = document.getElementById("campeonBox");
+      if (campeon && equipos[campeon]) {
+        campeonBox.style.display = "block";
+        document.getElementById("campeonNombre").innerHTML = `${equipos[campeon][1]} ${equipos[campeon][0]}`;
+      } else {
+        campeonBox.style.display = "none";
+      }
+    });
+  });
+}
+
+// ==================== NAVEGACIÓN ====================
+document.querySelectorAll("nav button[data-v]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("nav button[data-v]").forEach(b => b.classList.remove("act"));
+    document.querySelectorAll(".vista").forEach(v => v.classList.remove("act"));
+    btn.classList.add("act");
+    document.getElementById(btn.dataset.v).classList.add("act");
+  });
+});
+
+document.getElementById("btnReset").addEventListener("click", () => {
+  if (confirm("¿Reiniciar todas las predicciones?")) {
+    state = { scores: {}, picks: {} };
+    saveState();
+    renderAll();
+  }
+});
+
+// Inicializar
+renderAll();
+</script>
+</body>
+</html>
