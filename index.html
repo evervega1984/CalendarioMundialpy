@@ -327,13 +327,26 @@ main {
 }
 
 .mini-partido {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f2f2ee;
+  font-size: 0.8rem;
+}
+
+.mp-fecha {
+  font-size: 0.68rem;
+  color: #777;
+  margin-bottom: 4px;
+}
+
+.mp-fecha b {
+  color: #d52b1e;
+}
+
+.mp-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 6px;
-  padding: 8px 10px;
-  border-bottom: 1px solid #f2f2ee;
-  font-size: 0.8rem;
 }
 
 .mini-partido .mp-eq {
@@ -516,149 +529,182 @@ footer {
 <script>
 // ==================== DATOS ====================
 const equipos = {
-  "USA": ["Estados Unidos", "🇺🇸"],
-  "PAR": ["Paraguay", "🇵🇾"],
-  "AUS": ["Australia", "🇦🇺"],
-  "TUR": ["Turquía", "🇹🇷"],
-  "MEX": ["México", "🇲🇽"], "CAN": ["Canadá", "🇨🇦"], "BRA": ["Brasil", "🇧🇷"],
-  "ARG": ["Argentina", "🇦🇷"], "FRA": ["Francia", "🇫🇷"], "GER": ["Alemania", "🇩🇪"],
-  "ESP": ["España", "🇪🇸"], "ENG": ["Inglaterra", "🏴󠁧󠁢󠁥󠁮󠁧󠁿"], "NED": ["Países Bajos", "🇳🇱"],
-  "ITA": ["Italia", "🇮🇹"], "POR": ["Portugal", "🇵🇹"], "BEL": ["Bélgica", "🇧🇪"],
-  "CRO": ["Croacia", "🇭🇷"], "SUI": ["Suiza", "🇨🇭"], "DEN": ["Dinamarca", "🇩🇰"],
-  "SEN": ["Senegal", "🇸🇳"], "MAR": ["Marruecos", "🇲🇦"], "JPN": ["Japón", "🇯🇵"],
-  "KOR": ["Corea del Sur", "🇰🇷"], "URU": ["Uruguay", "🇺🇾"], "COL": ["Colombia", "🇨🇴"],
-  "ECU": ["Ecuador", "🇪🇨"], "CHI": ["Chile", "🇨🇱"], "PER": ["Perú", "🇵🇪"],
-  "GHA": ["Ghana", "🇬🇭"], "NGA": ["Nigeria", "🇳🇬"], "KSA": ["Arabia Saudita", "🇸🇦"],
-  "IRN": ["Irán", "🇮🇷"]
+  "MEX": ["México", "🇲🇽"], "RSA": ["Sudáfrica", "🇿🇦"], "KOR": ["Corea del Sur", "🇰🇷"], "CZE": ["Rep. Checa", "🇨🇿"],
+  "CAN": ["Canadá", "🇨🇦"], "BIH": ["Bosnia", "🇧🇦"], "QAT": ["Qatar", "🇶🇦"], "SUI": ["Suiza", "🇨🇭"],
+  "BRA": ["Brasil", "🇧🇷"], "MAR": ["Marruecos", "🇲🇦"], "HAI": ["Haití", "🇭🇹"], "SCO": ["Escocia", "🏴󠁧󠁢󠁳󠁣󠁴󠁿"],
+  "USA": ["Estados Unidos", "🇺🇸"], "PAR": ["Paraguay", "🇵🇾"], "AUS": ["Australia", "🇦🇺"], "TUR": ["Turquía", "🇹🇷"],
+  "GER": ["Alemania", "🇩🇪"], "CUW": ["Curazao", "🇨🇼"], "CIV": ["Costa de Marfil", "🇨🇮"], "ECU": ["Ecuador", "🇪🇨"],
+  "NED": ["Países Bajos", "🇳🇱"], "JPN": ["Japón", "🇯🇵"], "SWE": ["Suecia", "🇸🇪"], "TUN": ["Túnez", "🇹🇳"],
+  "BEL": ["Bélgica", "🇧🇪"], "EGY": ["Egipto", "🇪🇬"], "IRN": ["Irán", "🇮🇷"], "NZL": ["Nueva Zelanda", "🇳🇿"],
+  "ESP": ["España", "🇪🇸"], "CPV": ["Cabo Verde", "🇨🇻"], "KSA": ["Arabia Saudita", "🇸🇦"], "URU": ["Uruguay", "🇺🇾"],
+  "FRA": ["Francia", "🇫🇷"], "SEN": ["Senegal", "🇸🇳"], "IRQ": ["Irak", "🇮🇶"], "NOR": ["Noruega", "🇳🇴"],
+  "ARG": ["Argentina", "🇦🇷"], "ALG": ["Argelia", "🇩🇿"], "AUT": ["Austria", "🇦🇹"], "JOR": ["Jordania", "🇯🇴"],
+  "POR": ["Portugal", "🇵🇹"], "COD": ["RD Congo", "🇨🇩"], "UZB": ["Uzbekistán", "🇺🇿"], "COL": ["Colombia", "🇨🇴"],
+  "ENG": ["Inglaterra", "🏴󠁧󠁢󠁥󠁮󠁧󠁿"], "CRO": ["Croacia", "🇭🇷"], "GHA": ["Ghana", "🇬🇭"], "PAN": ["Panamá", "🇵🇦"]
 };
 
-// TODOS los partidos del GRUPO D - HORARIOS CORREGIDOS
-// REGLA: Paraguay (GMT-3) está 4 horas ADELANTE de Los Ángeles (GMT-7)
-// Ejemplo: Si en Paraguay son las 22:00, en Los Ángeles son las 18:00
-const partidosGrupoD = [
-  { 
-    id: "p1", local: "USA", visitante: "PAR", 
-    fecha: "Viernes 12 de junio", 
-    horaLocal: "18:00", ciudad: "Los Ángeles", 
-    horaPy: "22:00",
-    estadio: "SoFi Stadium"
-  },
-  { 
-    id: "p2", local: "AUS", visitante: "TUR", 
-    fecha: "Viernes 12 de junio", 
-    horaLocal: "21:00", ciudad: "Vancouver", 
-    horaPy: "01:00 (sábado 13)",
-    estadio: "BC Place"
-  },
-  { 
-    id: "p3", local: "USA", visitante: "AUS", 
-    fecha: "Viernes 19 de junio", 
-    horaLocal: "18:00", ciudad: "Seattle", 
-    horaPy: "22:00",
-    estadio: "Lumen Field"
-  },
-  { 
-    id: "p4", local: "TUR", visitante: "PAR", 
-    fecha: "Viernes 19 de junio", 
-    horaLocal: "18:00", ciudad: "San Francisco", 
-    horaPy: "22:00",
-    estadio: "Levi's Stadium"
-  },
-  { 
-    id: "p5", local: "TUR", visitante: "USA", 
-    fecha: "Jueves 25 de junio", 
-    horaLocal: "19:00", ciudad: "Los Ángeles", 
-    horaPy: "23:00",
-    estadio: "SoFi Stadium"
-  },
-  { 
-    id: "p6", local: "PAR", visitante: "AUS", 
-    fecha: "Jueves 25 de junio", 
-    horaLocal: "19:00", ciudad: "San Francisco", 
-    horaPy: "23:00",
-    estadio: "Levi's Stadium"
-  }
+const grupos = {
+  "A": ["MEX", "RSA", "KOR", "CZE"],
+  "B": ["CAN", "BIH", "QAT", "SUI"],
+  "C": ["BRA", "MAR", "HAI", "SCO"],
+  "D": ["USA", "PAR", "AUS", "TUR"],
+  "E": ["GER", "CUW", "CIV", "ECU"],
+  "F": ["NED", "JPN", "SWE", "TUN"],
+  "G": ["BEL", "EGY", "IRN", "NZL"],
+  "H": ["ESP", "CPV", "KSA", "URU"],
+  "I": ["FRA", "SEN", "IRQ", "NOR"],
+  "J": ["ARG", "ALG", "AUT", "JOR"],
+  "K": ["POR", "COD", "UZB", "COL"],
+  "L": ["ENG", "CRO", "GHA", "PAN"]
+};
+
+// 72 partidos de fase de grupos - fecha y hora en HORA PARAGUAY (GMT-3)
+const todosPartidosGrupos = [
+  // Jornada 1
+  { id: "m1",  grupo: "A", local: "MEX", visitante: "RSA", fecha: "Jue 11 jun", horaPy: "16:00" },
+  { id: "m2",  grupo: "A", local: "KOR", visitante: "CZE", fecha: "Jue 11 jun", horaPy: "23:00" },
+  { id: "m3",  grupo: "B", local: "CAN", visitante: "BIH", fecha: "Vie 12 jun", horaPy: "16:00" },
+  { id: "m4",  grupo: "D", local: "USA", visitante: "PAR", fecha: "Vie 12 jun", horaPy: "22:00",
+    fechaLarga: "Viernes 12 de junio", horaLocal: "18:00", ciudad: "Los Ángeles", estadio: "SoFi Stadium" },
+  { id: "m5",  grupo: "B", local: "QAT", visitante: "SUI", fecha: "Sáb 13 jun", horaPy: "16:00" },
+  { id: "m6",  grupo: "C", local: "BRA", visitante: "MAR", fecha: "Sáb 13 jun", horaPy: "19:00" },
+  { id: "m7",  grupo: "C", local: "HAI", visitante: "SCO", fecha: "Sáb 13 jun", horaPy: "22:00" },
+  { id: "m8",  grupo: "D", local: "AUS", visitante: "TUR", fecha: "Dom 14 jun", horaPy: "01:00",
+    fechaLarga: "Sábado 13 de junio", horaLocal: "21:00", ciudad: "Vancouver", estadio: "BC Place" },
+  { id: "m9",  grupo: "E", local: "GER", visitante: "CUW", fecha: "Dom 14 jun", horaPy: "14:00" },
+  { id: "m10", grupo: "F", local: "NED", visitante: "JPN", fecha: "Dom 14 jun", horaPy: "17:00" },
+  { id: "m11", grupo: "E", local: "CIV", visitante: "ECU", fecha: "Dom 14 jun", horaPy: "20:00" },
+  { id: "m12", grupo: "F", local: "SWE", visitante: "TUN", fecha: "Dom 14 jun", horaPy: "23:00" },
+  { id: "m13", grupo: "H", local: "ESP", visitante: "CPV", fecha: "Lun 15 jun", horaPy: "13:00" },
+  { id: "m14", grupo: "G", local: "BEL", visitante: "EGY", fecha: "Lun 15 jun", horaPy: "16:00" },
+  { id: "m15", grupo: "H", local: "KSA", visitante: "URU", fecha: "Lun 15 jun", horaPy: "19:00" },
+  { id: "m16", grupo: "G", local: "IRN", visitante: "NZL", fecha: "Lun 15 jun", horaPy: "22:00" },
+  { id: "m17", grupo: "I", local: "FRA", visitante: "SEN", fecha: "Mar 16 jun", horaPy: "16:00" },
+  { id: "m18", grupo: "I", local: "IRQ", visitante: "NOR", fecha: "Mar 16 jun", horaPy: "19:00" },
+  { id: "m19", grupo: "J", local: "ARG", visitante: "ALG", fecha: "Mar 16 jun", horaPy: "22:00" },
+  { id: "m20", grupo: "J", local: "AUT", visitante: "JOR", fecha: "Mié 17 jun", horaPy: "01:00" },
+  { id: "m21", grupo: "K", local: "POR", visitante: "COD", fecha: "Mié 17 jun", horaPy: "14:00" },
+  { id: "m22", grupo: "L", local: "ENG", visitante: "CRO", fecha: "Mié 17 jun", horaPy: "17:00" },
+  { id: "m23", grupo: "L", local: "GHA", visitante: "PAN", fecha: "Mié 17 jun", horaPy: "20:00" },
+  { id: "m24", grupo: "K", local: "UZB", visitante: "COL", fecha: "Mié 17 jun", horaPy: "23:00" },
+  // Jornada 2
+  { id: "m25", grupo: "A", local: "RSA", visitante: "CZE", fecha: "Jue 18 jun", horaPy: "13:00" },
+  { id: "m26", grupo: "B", local: "BIH", visitante: "SUI", fecha: "Jue 18 jun", horaPy: "16:00" },
+  { id: "m27", grupo: "B", local: "CAN", visitante: "QAT", fecha: "Jue 18 jun", horaPy: "19:00" },
+  { id: "m28", grupo: "A", local: "MEX", visitante: "KOR", fecha: "Jue 18 jun", horaPy: "22:00" },
+  { id: "m29", grupo: "D", local: "USA", visitante: "AUS", fecha: "Vie 19 jun", horaPy: "16:00",
+    fechaLarga: "Viernes 19 de junio", horaLocal: "12:00", ciudad: "Seattle", estadio: "Lumen Field" },
+  { id: "m30", grupo: "C", local: "SCO", visitante: "MAR", fecha: "Vie 19 jun", horaPy: "19:00" },
+  { id: "m31", grupo: "C", local: "BRA", visitante: "HAI", fecha: "Vie 19 jun", horaPy: "21:30" },
+  { id: "m32", grupo: "D", local: "TUR", visitante: "PAR", fecha: "Sáb 20 jun", horaPy: "00:00",
+    fechaLarga: "Viernes 19 de junio", horaLocal: "20:00", ciudad: "San Francisco", estadio: "Levi's Stadium" },
+  { id: "m33", grupo: "F", local: "NED", visitante: "SWE", fecha: "Sáb 20 jun", horaPy: "14:00" },
+  { id: "m34", grupo: "E", local: "GER", visitante: "CIV", fecha: "Sáb 20 jun", horaPy: "17:00" },
+  { id: "m35", grupo: "E", local: "ECU", visitante: "CUW", fecha: "Sáb 20 jun", horaPy: "21:00" },
+  { id: "m36", grupo: "F", local: "TUN", visitante: "JPN", fecha: "Dom 21 jun", horaPy: "01:00" },
+  { id: "m37", grupo: "H", local: "ESP", visitante: "KSA", fecha: "Dom 21 jun", horaPy: "13:00" },
+  { id: "m38", grupo: "G", local: "BEL", visitante: "IRN", fecha: "Dom 21 jun", horaPy: "16:00" },
+  { id: "m39", grupo: "H", local: "URU", visitante: "CPV", fecha: "Dom 21 jun", horaPy: "19:00" },
+  { id: "m40", grupo: "G", local: "NZL", visitante: "EGY", fecha: "Dom 21 jun", horaPy: "22:00" },
+  { id: "m41", grupo: "J", local: "ARG", visitante: "AUT", fecha: "Lun 22 jun", horaPy: "14:00" },
+  { id: "m42", grupo: "I", local: "FRA", visitante: "IRQ", fecha: "Lun 22 jun", horaPy: "18:00" },
+  { id: "m43", grupo: "I", local: "NOR", visitante: "SEN", fecha: "Lun 22 jun", horaPy: "21:00" },
+  { id: "m44", grupo: "J", local: "JOR", visitante: "ALG", fecha: "Mar 23 jun", horaPy: "00:00" },
+  { id: "m45", grupo: "K", local: "POR", visitante: "UZB", fecha: "Mar 23 jun", horaPy: "14:00" },
+  { id: "m46", grupo: "L", local: "ENG", visitante: "GHA", fecha: "Mar 23 jun", horaPy: "17:00" },
+  { id: "m47", grupo: "L", local: "PAN", visitante: "CRO", fecha: "Mar 23 jun", horaPy: "20:00" },
+  { id: "m48", grupo: "K", local: "COL", visitante: "COD", fecha: "Mar 23 jun", horaPy: "23:00" },
+  // Jornada 3
+  { id: "m49", grupo: "B", local: "SUI", visitante: "CAN", fecha: "Mié 24 jun", horaPy: "16:00" },
+  { id: "m50", grupo: "B", local: "BIH", visitante: "QAT", fecha: "Mié 24 jun", horaPy: "16:00" },
+  { id: "m51", grupo: "C", local: "SCO", visitante: "BRA", fecha: "Mié 24 jun", horaPy: "19:00" },
+  { id: "m52", grupo: "C", local: "MAR", visitante: "HAI", fecha: "Mié 24 jun", horaPy: "19:00" },
+  { id: "m53", grupo: "A", local: "CZE", visitante: "MEX", fecha: "Mié 24 jun", horaPy: "22:00" },
+  { id: "m54", grupo: "A", local: "RSA", visitante: "KOR", fecha: "Mié 24 jun", horaPy: "22:00" },
+  { id: "m55", grupo: "E", local: "ECU", visitante: "GER", fecha: "Jue 25 jun", horaPy: "17:00" },
+  { id: "m56", grupo: "E", local: "CUW", visitante: "CIV", fecha: "Jue 25 jun", horaPy: "17:00" },
+  { id: "m57", grupo: "F", local: "TUN", visitante: "NED", fecha: "Jue 25 jun", horaPy: "20:00" },
+  { id: "m58", grupo: "F", local: "JPN", visitante: "SWE", fecha: "Jue 25 jun", horaPy: "20:00" },
+  { id: "m59", grupo: "D", local: "TUR", visitante: "USA", fecha: "Jue 25 jun", horaPy: "23:00",
+    fechaLarga: "Jueves 25 de junio", horaLocal: "19:00", ciudad: "Los Ángeles", estadio: "SoFi Stadium" },
+  { id: "m60", grupo: "D", local: "PAR", visitante: "AUS", fecha: "Jue 25 jun", horaPy: "23:00",
+    fechaLarga: "Jueves 25 de junio", horaLocal: "19:00", ciudad: "San Francisco", estadio: "Levi's Stadium" },
+  { id: "m61", grupo: "I", local: "NOR", visitante: "FRA", fecha: "Vie 26 jun", horaPy: "16:00" },
+  { id: "m62", grupo: "I", local: "SEN", visitante: "IRQ", fecha: "Vie 26 jun", horaPy: "16:00" },
+  { id: "m63", grupo: "H", local: "URU", visitante: "ESP", fecha: "Vie 26 jun", horaPy: "21:00" },
+  { id: "m64", grupo: "H", local: "CPV", visitante: "KSA", fecha: "Vie 26 jun", horaPy: "21:00" },
+  { id: "m65", grupo: "G", local: "NZL", visitante: "BEL", fecha: "Sáb 27 jun", horaPy: "00:00" },
+  { id: "m66", grupo: "G", local: "EGY", visitante: "IRN", fecha: "Sáb 27 jun", horaPy: "00:00" },
+  { id: "m67", grupo: "L", local: "PAN", visitante: "ENG", fecha: "Sáb 27 jun", horaPy: "18:00" },
+  { id: "m68", grupo: "L", local: "CRO", visitante: "GHA", fecha: "Sáb 27 jun", horaPy: "18:00" },
+  { id: "m69", grupo: "K", local: "COL", visitante: "POR", fecha: "Sáb 27 jun", horaPy: "20:30" },
+  { id: "m70", grupo: "K", local: "COD", visitante: "UZB", fecha: "Sáb 27 jun", horaPy: "20:30" },
+  { id: "m71", grupo: "J", local: "JOR", visitante: "ARG", fecha: "Sáb 27 jun", horaPy: "23:00" },
+  { id: "m72", grupo: "J", local: "ALG", visitante: "AUT", fecha: "Sáb 27 jun", horaPy: "23:00" }
 ];
 
-// Grupos completos
-const grupos = {
-  "A": ["MEX", "CAN", "BRA", "ARG"],
-  "B": ["FRA", "GER", "ESP", "ENG"],
-  "C": ["NED", "ITA", "POR", "BEL"],
-  "D": ["USA", "PAR", "AUS", "TUR"],
-  "E": ["CRO", "SUI", "DEN", "SEN"],
-  "F": ["MAR", "JPN", "KOR", "URU"],
-  "G": ["COL", "ECU", "PER", "CHI"],
-  "H": ["GHA", "NGA", "KSA", "IRN"]
-};
+const partidosGrupoD = todosPartidosGrupos.filter(p => p.grupo === "D");
 
-partidosGrupoD.forEach(p => p.grupo = "D");
-
-// Generar partidos de otros grupos
-const todosPartidosGrupos = [...partidosGrupoD];
-for (const [grupo, equiposG] of Object.entries(grupos)) {
-  if (grupo === "D") continue;
-  for (let i = 0; i < equiposG.length; i++) {
-    for (let j = i + 1; j < equiposG.length; j++) {
-      todosPartidosGrupos.push({
-        id: `p_${grupo}_${i}_${j}`,
-        grupo: grupo,
-        local: equiposG[i],
-        visitante: equiposG[j],
-        fecha: "Junio 2026",
-        horaPy: "--:--",
-        estadio: "Por definir"
-      });
-    }
-  }
-}
-
-// Eliminatorias
+// Eliminatorias - cuadro oficial FIFA 2026 (16avos = ronda de 32)
+// "tercero": grupos posibles del mejor tercero que ocupa esa llave
 const eliminatorias = [
-  { id: "r32_1", ronda: "16avos", local: "1A", visitante: "2B" },
-  { id: "r32_2", ronda: "16avos", local: "1C", visitante: "2D" },
-  { id: "r32_3", ronda: "16avos", local: "1B", visitante: "2A" },
-  { id: "r32_4", ronda: "16avos", local: "1D", visitante: "2C" },
-  { id: "r32_5", ronda: "16avos", local: "1E", visitante: "2F" },
-  { id: "r32_6", ronda: "16avos", local: "1G", visitante: "2H" },
-  { id: "r32_7", ronda: "16avos", local: "1F", visitante: "2E" },
-  { id: "r32_8", ronda: "16avos", local: "1H", visitante: "2G" },
-  { id: "oct_1", ronda: "Octavos", local: "Wr32_1", visitante: "Wr32_2" },
-  { id: "oct_2", ronda: "Octavos", local: "Wr32_3", visitante: "Wr32_4" },
-  { id: "oct_3", ronda: "Octavos", local: "Wr32_5", visitante: "Wr32_6" },
-  { id: "oct_4", ronda: "Octavos", local: "Wr32_7", visitante: "Wr32_8" },
-  { id: "cuar_1", ronda: "Cuartos", local: "Woct_1", visitante: "Woct_2" },
-  { id: "cuar_2", ronda: "Cuartos", local: "Woct_3", visitante: "Woct_4" },
-  { id: "semi_1", ronda: "Semifinal", local: "Wcuar_1", visitante: "Wcuar_2" },
-  { id: "semi_2", ronda: "Semifinal", local: "Wcuar_3", visitante: "Wcuar_4" },
-  { id: "final", ronda: "Final", local: "Wsemi_1", visitante: "Wsemi_2" }
+  { id: "m73",  ronda: "16avos", local: "2A", visitante: "2B" },
+  { id: "m74",  ronda: "16avos", local: "1E", tercero: ["A","B","C","D","F"] },
+  { id: "m75",  ronda: "16avos", local: "1F", visitante: "2C" },
+  { id: "m76",  ronda: "16avos", local: "1C", visitante: "2F" },
+  { id: "m77",  ronda: "16avos", local: "1I", tercero: ["C","D","F","G","H"] },
+  { id: "m78",  ronda: "16avos", local: "2E", visitante: "2I" },
+  { id: "m79",  ronda: "16avos", local: "1A", tercero: ["C","E","F","H","I"] },
+  { id: "m80",  ronda: "16avos", local: "1L", tercero: ["E","H","I","J","K"] },
+  { id: "m81",  ronda: "16avos", local: "1D", tercero: ["B","E","F","I","J"] },
+  { id: "m82",  ronda: "16avos", local: "1G", tercero: ["A","E","H","I","J"] },
+  { id: "m83",  ronda: "16avos", local: "2K", visitante: "2L" },
+  { id: "m84",  ronda: "16avos", local: "1H", visitante: "2J" },
+  { id: "m85",  ronda: "16avos", local: "1B", tercero: ["E","F","G","I","J"] },
+  { id: "m86",  ronda: "16avos", local: "1J", visitante: "2H" },
+  { id: "m87",  ronda: "16avos", local: "1K", tercero: ["D","E","I","J","L"] },
+  { id: "m88",  ronda: "16avos", local: "2D", visitante: "2G" },
+  { id: "m89",  ronda: "Octavos", local: "Wm74", visitante: "Wm77" },
+  { id: "m90",  ronda: "Octavos", local: "Wm73", visitante: "Wm75" },
+  { id: "m91",  ronda: "Octavos", local: "Wm76", visitante: "Wm78" },
+  { id: "m92",  ronda: "Octavos", local: "Wm79", visitante: "Wm80" },
+  { id: "m93",  ronda: "Octavos", local: "Wm83", visitante: "Wm84" },
+  { id: "m94",  ronda: "Octavos", local: "Wm81", visitante: "Wm82" },
+  { id: "m95",  ronda: "Octavos", local: "Wm86", visitante: "Wm88" },
+  { id: "m96",  ronda: "Octavos", local: "Wm85", visitante: "Wm87" },
+  { id: "m97",  ronda: "Cuartos", local: "Wm89", visitante: "Wm90" },
+  { id: "m98",  ronda: "Cuartos", local: "Wm93", visitante: "Wm94" },
+  { id: "m99",  ronda: "Cuartos", local: "Wm91", visitante: "Wm92" },
+  { id: "m100", ronda: "Cuartos", local: "Wm95", visitante: "Wm96" },
+  { id: "m101", ronda: "Semifinal", local: "Wm97", visitante: "Wm98" },
+  { id: "m102", ronda: "Semifinal", local: "Wm99", visitante: "Wm100" },
+  { id: "m103", ronda: "Tercer Puesto", local: "Lm101", visitante: "Lm102" },
+  { id: "final", ronda: "Final", local: "Wm101", visitante: "Wm102" }
 ];
 
 // ==================== ESTADO ====================
 let state = { scores: {}, picks: {} };
 
 try {
-  const saved = localStorage.getItem("mundial2026_py");
+  const saved = localStorage.getItem("mundial2026_py_v2");
   if (saved) state = JSON.parse(saved);
 } catch(e) {}
 
 function saveState() {
-  localStorage.setItem("mundial2026_py", JSON.stringify(state));
+  localStorage.setItem("mundial2026_py_v2", JSON.stringify(state));
 }
 
 // ==================== LÓGICA ====================
 function calcularTablaGrupo(grupo) {
   const equiposGrupo = grupos[grupo];
   if (!equiposGrupo) return [];
-  
+
   const tabla = {};
   equiposGrupo.forEach(eq => {
     tabla[eq] = { eq, pj: 0, gf: 0, gc: 0, pts: 0 };
   });
-  
-  const partidosGrupo = todosPartidosGrupos.filter(p => p.grupo === grupo);
-  
-  partidosGrupo.forEach(p => {
+
+  todosPartidosGrupos.filter(p => p.grupo === grupo).forEach(p => {
     const score = state.scores[p.id];
     if (score && score[0] != null && score[1] != null) {
       tabla[p.local].pj++;
@@ -667,13 +713,13 @@ function calcularTablaGrupo(grupo) {
       tabla[p.visitante].pj++;
       tabla[p.visitante].gf += score[1];
       tabla[p.visitante].gc += score[0];
-      
+
       if (score[0] > score[1]) tabla[p.local].pts += 3;
       else if (score[1] > score[0]) tabla[p.visitante].pts += 3;
       else { tabla[p.local].pts += 1; tabla[p.visitante].pts += 1; }
     }
   });
-  
+
   return Object.values(tabla).sort((a,b) => {
     if (a.pts !== b.pts) return b.pts - a.pts;
     const dgA = a.gf - a.gc;
@@ -691,35 +737,87 @@ function grupoCompleto(grupo) {
   });
 }
 
-function obtenerClasificados(grupo) {
-  const tabla = calcularTablaGrupo(grupo);
-  return { primero: tabla[0]?.eq, segundo: tabla[1]?.eq };
+function todosGruposCompletos() {
+  return Object.keys(grupos).every(grupoCompleto);
 }
 
-function resolverEquipo(ref) {
+// Asigna los 8 mejores terceros a sus llaves de 16avos (requiere todos los grupos completos)
+function calcularTerceros() {
+  if (!todosGruposCompletos()) return null;
+  const ranking = Object.keys(grupos).map(g => {
+    const t = calcularTablaGrupo(g)[2];
+    return { grupo: g, eq: t.eq, pts: t.pts, dg: t.gf - t.gc, gf: t.gf };
+  }).sort((a,b) => b.pts - a.pts || b.dg - a.dg || b.gf - a.gf || a.grupo.localeCompare(b.grupo));
+  const clasif = ranking.slice(0, 8);
+  const slots = eliminatorias.filter(e => e.tercero);
+  const asign = {};
+  const usados = new Set();
+  function bt(i) {
+    if (i === slots.length) return true;
+    for (const t of clasif) {
+      if (usados.has(t.grupo) || !slots[i].tercero.includes(t.grupo)) continue;
+      asign[slots[i].id] = t.eq;
+      usados.add(t.grupo);
+      if (bt(i + 1)) return true;
+      usados.delete(t.grupo);
+      delete asign[slots[i].id];
+    }
+    return false;
+  }
+  return bt(0) ? asign : null;
+}
+
+function resolverEquipo(ref, terceros) {
   if (!ref) return null;
-  if (ref.startsWith("W")) return state.picks[ref.substring(1)];
+  if (ref.startsWith("W")) return state.picks[ref.substring(1)] || null;
+  if (ref.startsWith("L")) {
+    const m = eliminatorias.find(x => x.id === ref.substring(1));
+    if (!m) return null;
+    const [a, b] = equiposDePartido(m, terceros);
+    const w = state.picks[m.id];
+    if (!w || !a || !b) return null;
+    return w === a ? b : a;
+  }
   if (ref.length >= 2 && ref[0] >= '1' && ref[0] <= '9') {
-    if (!grupoCompleto(ref[1])) return null;
-    const clasif = obtenerClasificados(ref[1]);
-    return ref[0] === "1" ? clasif.primero : clasif.segundo;
+    const grupo = ref[1];
+    if (!grupoCompleto(grupo)) return null;
+    const tabla = calcularTablaGrupo(grupo);
+    return ref[0] === "1" ? tabla[0]?.eq : tabla[1]?.eq;
   }
   return ref;
 }
 
+function equiposDePartido(elim, terceros) {
+  const localEq = resolverEquipo(elim.local, terceros);
+  const visitEq = elim.tercero
+    ? (terceros ? terceros[elim.id] : null)
+    : resolverEquipo(elim.visitante, terceros);
+  return [localEq, visitEq];
+}
+
+function etiquetaRef(ref) {
+  if (!ref) return "Por definir";
+  if (ref.startsWith("W")) return "Por definir";
+  if (ref.startsWith("L")) return "Perdedor semifinal";
+  if (ref[0] === "1") return `1° Grupo ${ref[1]}`;
+  if (ref[0] === "2") return `2° Grupo ${ref[1]}`;
+  return "Por definir";
+}
+
+// ==================== RENDER ====================
 function renderCalendarioGrupoD() {
   const container = document.getElementById("calendarioGrupoD");
-  
+
   container.innerHTML = partidosGrupoD.map(p => {
     const score = state.scores[p.id] || [null, null];
     const esParaguay = p.local === "PAR" || p.visitante === "PAR";
-    
+
     return `
       <div class="partido-item ${esParaguay ? 'paraguay' : ''}">
         <div class="fecha">
-          <div class="dia">📅 ${p.fecha}</div>
+          <div class="dia">📅 ${p.fechaLarga}</div>
           <div class="hora-local">📍 ${p.ciudad} · ${p.horaLocal} (hora local)</div>
-          <div class="hora-py"><span>🇵🇾 PY</span> ${p.horaPy}</div>
+          <div class="hora-py"><span>🇵🇾 PY</span> ${p.horaPy} ${p.fecha !== p.fechaLarga && p.horaPy < "06:00" ? `(${p.fecha})` : ""}</div>
         </div>
         <div class="equipos">
           <div class="equipo ${p.local === 'PAR' ? 'par' : ''}">
@@ -742,7 +840,7 @@ function renderCalendarioGrupoD() {
       </div>
     `;
   }).join("");
-  
+
   attachScoreListeners(container);
 }
 
@@ -752,31 +850,24 @@ function attachScoreListeners(container) {
       const partidoId = inp.dataset.partido;
       const esLocal = inp.dataset.eslocal === "1";
       const valor = inp.value === "" ? null : Math.max(0, Math.min(20, parseInt(inp.value) || 0));
-      
+
       if (!state.scores[partidoId]) state.scores[partidoId] = [null, null];
       state.scores[partidoId][esLocal ? 0 : 1] = valor;
-      
+
       if (state.scores[partidoId][0] === null && state.scores[partidoId][1] === null) {
         delete state.scores[partidoId];
       }
-      
+
       saveState();
       renderAll();
     });
   });
 }
 
-function renderAll() {
-  renderCalendarioGrupoD();
-  renderTablaGrupoD();
-  renderGrupos();
-  renderEliminatorias();
-}
-
 function renderTablaGrupoD() {
   const tabla = calcularTablaGrupo("D");
   const container = document.getElementById("tablaGrupoD");
-  
+
   container.innerHTML = `
     <table class="tabla-grupo">
       <thead>
@@ -784,7 +875,7 @@ function renderTablaGrupoD() {
       </thead>
       <tbody>
         ${tabla.map((t, idx) => `
-          <tr class="${idx < 2 ? 'clasifica' : ''} ${t.eq === 'PAR' ? 'paraguay-row' : ''}">
+          <tr class="${idx < 2 ? 'clasifica' : ''} ${t.eq === 'PAR' ? 'paraguay-row' : ''}" ${idx === 2 ? 'style="background:#fffde7"' : ''}>
             <td style="text-align:center"><b>${idx + 1}</b></td>
             <td style="text-align:left">${equipos[t.eq]?.[1] || ""} <b>${equipos[t.eq]?.[0] || t.eq}</b></td>
             <td style="text-align:center">${t.pj}</td>
@@ -797,7 +888,7 @@ function renderTablaGrupoD() {
       </tbody>
     </table>
     <div style="padding: 12px; background: #f5f5f0; text-align: center;">
-      ✅ <strong>Clasifican a 16avos de final:</strong> 1° y 2° del grupo
+      ✅ <strong>Clasifican directo:</strong> 1° y 2° · El 3° puede avanzar entre los 8 mejores terceros
     </div>
   `;
 }
@@ -815,21 +906,24 @@ function renderGrupos() {
             const score = state.scores[p.id] || [null, null];
             return `
               <div class="mini-partido">
-                <span class="mp-eq">${equipos[p.local]?.[1] || ""} ${equipos[p.local]?.[0] || p.local}</span>
-                <span class="mp-score">
-                  <input type="number" min="0" max="20" value="${score[0] ?? ""}" data-partido="${p.id}" data-eslocal="1" placeholder="-">
-                  -
-                  <input type="number" min="0" max="20" value="${score[1] ?? ""}" data-partido="${p.id}" data-eslocal="0" placeholder="-">
-                </span>
-                <span class="mp-eq mp-visit">${equipos[p.visitante]?.[0] || p.visitante} ${equipos[p.visitante]?.[1] || ""}</span>
+                <div class="mp-fecha">📅 ${p.fecha} · <b>🇵🇾 ${p.horaPy}</b></div>
+                <div class="mp-row">
+                  <span class="mp-eq">${equipos[p.local]?.[1] || ""} ${equipos[p.local]?.[0] || p.local}</span>
+                  <span class="mp-score">
+                    <input type="number" min="0" max="20" value="${score[0] ?? ""}" data-partido="${p.id}" data-eslocal="1" placeholder="-">
+                    -
+                    <input type="number" min="0" max="20" value="${score[1] ?? ""}" data-partido="${p.id}" data-eslocal="0" placeholder="-">
+                  </span>
+                  <span class="mp-eq mp-visit">${equipos[p.visitante]?.[0] || p.visitante} ${equipos[p.visitante]?.[1] || ""}</span>
+                </div>
               </div>`;
           }).join("")}
         </div>
         <table class="tabla-mini">
           <thead><tr><th>Equipo</th><th>Pts</th><th>DG</th></tr></thead>
           <tbody>${tabla.map((t, idx) => `
-            <tr ${idx < 2 ? 'style="background:#e8f5e9"' : ''}>
-              <td>${equipos[t.eq]?.[1] || ""} ${equipos[t.eq]?.[0]?.substring(0,12) || t.eq}</td>
+            <tr ${idx < 2 ? 'style="background:#e8f5e9"' : (idx === 2 ? 'style="background:#fffde7"' : '')}>
+              <td>${equipos[t.eq]?.[1] || ""} ${equipos[t.eq]?.[0]?.substring(0,14) || t.eq}</td>
               <td style="text-align:center"><b>${t.pts}</b></td>
               <td style="text-align:center">${t.gf - t.gc}</td>
             </tr>
@@ -843,27 +937,33 @@ function renderGrupos() {
 
 function renderEliminatorias() {
   const container = document.getElementById("eliminatoriasContainer");
-  const rondas = { "16avos": [], "Octavos": [], "Cuartos": [], "Semifinal": [], "Final": [] };
-  
+  const terceros = calcularTerceros();
+  const rondas = { "16avos": [], "Octavos": [], "Cuartos": [], "Semifinal": [], "Tercer Puesto": [], "Final": [] };
+
   eliminatorias.forEach(e => { if (rondas[e.ronda]) rondas[e.ronda].push(e); });
-  
-  container.innerHTML = Object.entries(rondas).map(([nombre, partidos]) => {
+
+  const aviso = todosGruposCompletos() ? "" : `
+    <div class="estado" style="background:#fff3e0; margin:0 0 20px 0;">
+      ⏳ Las llaves se completan automáticamente cuando cargues los resultados de TODOS los grupos
+    </div>`;
+
+  container.innerHTML = aviso + Object.entries(rondas).map(([nombre, partidos]) => {
     if (partidos.length === 0) return "";
     return `
       <div class="ronda">
         <h3>${nombre}</h3>
         <div class="eliminatorias-grid">
           ${partidos.map(elim => {
-            const localEq = resolverEquipo(elim.local);
-            const visitEq = resolverEquipo(elim.visitante);
+            const [localEq, visitEq] = equiposDePartido(elim, terceros);
             const ganador = state.picks[elim.id];
+            const labelVisit = elim.tercero ? `Mejor 3° (${elim.tercero.join("/")})` : etiquetaRef(elim.visitante);
             return `
               <div class="elim-partido">
-                <div class="elim-equipo ${ganador === localEq ? 'seleccionado' : ''}" data-partido="${elim.id}" data-equipo="${localEq || ''}">
-                  ${localEq ? (equipos[localEq]?.[1] || "🏁") + " " + (equipos[localEq]?.[0] || localEq) : "❓ Por definir"}
+                <div class="elim-equipo ${ganador && ganador === localEq ? 'seleccionado' : ''}" data-partido="${elim.id}" data-equipo="${localEq || ''}">
+                  ${localEq ? (equipos[localEq]?.[1] || "🏁") + " " + (equipos[localEq]?.[0] || localEq) : "❓ " + etiquetaRef(elim.local)}
                 </div>
-                <div class="elim-equipo ${ganador === visitEq ? 'seleccionado' : ''}" data-partido="${elim.id}" data-equipo="${visitEq || ''}">
-                  ${visitEq ? (equipos[visitEq]?.[1] || "🏁") + " " + (equipos[visitEq]?.[0] || visitEq) : "❓ Por definir"}
+                <div class="elim-equipo ${ganador && ganador === visitEq ? 'seleccionado' : ''}" data-partido="${elim.id}" data-equipo="${visitEq || ''}">
+                  ${visitEq ? (equipos[visitEq]?.[1] || "🏁") + " " + (equipos[visitEq]?.[0] || visitEq) : "❓ " + labelVisit}
                 </div>
               </div>
             `;
@@ -872,7 +972,7 @@ function renderEliminatorias() {
       </div>
     `;
   }).join("");
-  
+
   container.querySelectorAll(".elim-equipo").forEach(el => {
     el.addEventListener("click", () => {
       const equipo = el.dataset.equipo;
@@ -882,17 +982,24 @@ function renderEliminatorias() {
       else state.picks[partidoId] = equipo;
       saveState();
       renderEliminatorias();
-      
-      const campeon = state.picks["final"];
-      const campeonBox = document.getElementById("campeonBox");
-      if (campeon && equipos[campeon]) {
-        campeonBox.style.display = "block";
-        document.getElementById("campeonNombre").innerHTML = `${equipos[campeon][1]} ${equipos[campeon][0]}`;
-      } else {
-        campeonBox.style.display = "none";
-      }
     });
   });
+
+  const campeon = state.picks["final"];
+  const campeonBox = document.getElementById("campeonBox");
+  if (campeon && equipos[campeon]) {
+    campeonBox.style.display = "block";
+    document.getElementById("campeonNombre").innerHTML = `${equipos[campeon][1]} ${equipos[campeon][0]}`;
+  } else {
+    campeonBox.style.display = "none";
+  }
+}
+
+function renderAll() {
+  renderCalendarioGrupoD();
+  renderTablaGrupoD();
+  renderGrupos();
+  renderEliminatorias();
 }
 
 // ==================== NAVEGACIÓN ====================
