@@ -657,6 +657,559 @@ const eliminatorias = [
   { id: "m79",  ronda: "16avos", local: "1A", tercero: ["C","E","F","H","I"] },
   { id: "m80",  ronda: "16avos", local: "1L", tercero: ["E","H","I","J","K"] },
   { id: "m81",  ronda: "16avos", local: "1D", tercero: ["B","E","F","I","J"] },
+  { id: "m82",  ronda: "16avos", local: "1G", tercer}
+
+/* Calendario Grupo D */
+.calendario-grupo-d {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+.calendario-header {
+  background: #003087;
+  color: white;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.calendario-header .flag {
+  font-size: 48px;
+}
+
+.calendario-header h2 {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.8rem;
+}
+
+.partido-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  flex-wrap: wrap;
+  gap: 15px;
+  transition: background 0.2s;
+}
+
+.partido-item:hover {
+  background: #f9f9f5;
+}
+
+.partido-item.paraguay {
+  background: #fff8e8;
+  border-left: 4px solid #d52b1e;
+}
+
+.fecha {
+  min-width: 170px;
+}
+
+.fecha .dia {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #003087;
+}
+
+.fecha .hora-local {
+  color: #666;
+  font-size: 0.7rem;
+}
+
+.fecha .hora-py {
+  color: #d52b1e;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+.fecha .hora-py span {
+  background: #ffd700;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  margin-right: 5px;
+}
+
+.equipos {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  font-weight: bold;
+  flex-wrap: wrap;
+}
+
+.equipo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 140px;
+}
+
+.equipo.par {
+  color: #d52b1e;
+}
+
+.equipo .bandera {
+  font-size: 32px;
+}
+
+.marcador {
+  min-width: 100px;
+  text-align: center;
+}
+
+.marcador input {
+  width: 55px;
+  padding: 8px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin: 0 5px;
+}
+
+.marcador input:focus {
+  outline: none;
+  border-color: #003087;
+}
+
+.estadio {
+  min-width: 150px;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.estadio .nombre-estadio {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Tabla */
+.tabla-container {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+.tabla-header {
+  background: #003087;
+  color: white;
+  padding: 15px 20px;
+  font-family: 'Anton', sans-serif;
+  font-size: 1.3rem;
+}
+
+.tabla-grupo {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-grupo th, .tabla-grupo td {
+  padding: 12px 10px;
+  text-align: center;
+}
+
+.tabla-grupo th {
+  background: #f5f5f0;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+}
+
+.tabla-grupo td:first-child {
+  text-align: left;
+}
+
+.tabla-grupo tr.clasifica {
+  background: #e8f5e9;
+}
+
+.tabla-grupo tr.paraguay-row td:first-child {
+  border-left: 4px solid #d52b1e;
+}
+
+/* Grupos */
+.grupos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px;
+}
+
+.grupo-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.grupo-titulo {
+  background: #003087;
+  color: white;
+  padding: 12px 16px;
+  font-family: 'Anton', sans-serif;
+  font-size: 1.3rem;
+}
+
+.tabla-mini {
+  width: 100%;
+  font-size: 0.8rem;
+  border-collapse: collapse;
+}
+
+.tabla-mini th, .tabla-mini td {
+  padding: 8px 6px;
+  text-align: center;
+}
+
+.tabla-mini td:first-child {
+  text-align: left;
+}
+
+.grupo-partidos {
+  border-bottom: 2px solid #eee;
+}
+
+.mini-partido {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f2f2ee;
+  font-size: 0.8rem;
+}
+
+.mp-fecha {
+  font-size: 0.68rem;
+  color: #777;
+  margin-bottom: 4px;
+}
+
+.mp-fecha b {
+  color: #d52b1e;
+}
+
+.mp-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.mini-partido .mp-eq {
+  flex: 1;
+}
+
+.mini-partido .mp-visit {
+  text-align: right;
+}
+
+.mini-partido input {
+  width: 40px;
+  padding: 4px;
+  text-align: center;
+  font-weight: bold;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+}
+
+.mini-partido input:focus {
+  outline: none;
+  border-color: #003087;
+}
+
+/* Eliminatorias */
+.ronda {
+  margin-bottom: 30px;
+}
+
+.ronda h3 {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  padding-left: 10px;
+  border-left: 5px solid #003087;
+}
+
+.eliminatorias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 15px;
+}
+
+.elim-partido {
+  background: white;
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.elim-equipo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  margin: 5px 0;
+  background: #f5f5f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.elim-equipo:hover {
+  background: #e0e0e0;
+}
+
+.elim-equipo.seleccionado {
+  background: #003087;
+  color: white;
+}
+
+.campeon-box {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  text-align: center;
+  padding: 30px;
+  border-radius: 16px;
+  margin-top: 30px;
+}
+
+.campeon-box .trofeo {
+  font-size: 48px;
+}
+
+.campeon-box .nombre {
+  font-family: 'Anton', sans-serif;
+  font-size: 2rem;
+  margin-top: 10px;
+}
+
+.estado {
+  text-align: center;
+  padding: 12px;
+  background: #e8f5e9;
+  margin: 10px 20px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #1a1a2e;
+  color: white;
+  margin-top: 40px;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .partido-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  .equipos {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Mundial <span>2026</span></h1>
+  <div class="sub">Canadá · México · Estados Unidos | 11 junio - 19 julio</div>
+  <div class="paraguay-badge">🇵🇾 ¡Vamos Paraguay! 🇵🇾</div>
+  <div class="horario-info">
+    🕐 Paraguay (GMT-3) está 4 horas ADELANTE de Los Ángeles (GMT-7)
+  </div>
+</header>
+
+<nav>
+  <button class="act" data-v="calendario">📅 Grupo D · Paraguay</button>
+  <button data-v="grupos">🏆 Todos los Grupos</button>
+  <button data-v="eliminatorias">⚽ Eliminatorias</button>
+  <button class="reset" id="btnReset">🔄 Reiniciar todo</button>
+</nav>
+
+<div class="estado" id="estado">🇵🇾 Completá los resultados · Horarios en HORA PARAGUAY (GMT-3)</div>
+
+<main>
+  <section id="calendario" class="vista act">
+    <div class="calendario-grupo-d">
+      <div class="calendario-header">
+        <div class="flag">🇵🇾</div>
+        <div>
+          <h2>Grupo D · Calendario completo</h2>
+          <p>Estados Unidos · Paraguay · Australia · Turquía</p>
+          <p>✅ TODOS los horarios convertidos a <strong>HORA PARAGUAY (GMT-3)</strong></p>
+        </div>
+      </div>
+      <div id="calendarioGrupoD"></div>
+    </div>
+
+    <div class="tabla-container">
+      <div class="tabla-header">
+        📊 Tabla de posiciones - Grupo D
+      </div>
+      <div id="tablaGrupoD"></div>
+    </div>
+  </section>
+
+  <section id="grupos" class="vista">
+    <div class="grupos-grid" id="gruposContainer"></div>
+  </section>
+
+  <section id="eliminatorias" class="vista">
+    <div id="eliminatoriasContainer"></div>
+    <div class="campeon-box" id="campeonBox" style="display: none;">
+      <div class="trofeo">🏆</div>
+      <div class="nombre" id="campeonNombre"></div>
+      <p>¡Tu campeón del mundo 2026!</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>🇵🇾 Mundial 2026 - Predictor Paraguay | Hora oficial Paraguay (GMT-3)</p>
+  <p>📌 Diferencia: Paraguay está 4 horas ADELANTE de Los Ángeles (ej: 22:00 PY = 18:00 LA)</p>
+</footer>
+
+<script>
+// ==================== DATOS ====================
+const equipos = {
+  "MEX": ["México", "🇲🇽"], "RSA": ["Sudáfrica", "🇿🇦"], "KOR": ["Corea del Sur", "🇰🇷"], "CZE": ["Rep. Checa", "🇨🇿"],
+  "CAN": ["Canadá", "🇨🇦"], "BIH": ["Bosnia", "🇧🇦"], "QAT": ["Qatar", "🇶🇦"], "SUI": ["Suiza", "🇨🇭"],
+  "BRA": ["Brasil", "🇧🇷"], "MAR": ["Marruecos", "🇲🇦"], "HAI": ["Haití", "🇭🇹"], "SCO": ["Escocia", "🏴󠁧󠁢󠁳󠁣󠁴󠁿"],
+  "USA": ["Estados Unidos", "🇺🇸"], "PAR": ["Paraguay", "🇵🇾"], "AUS": ["Australia", "🇦🇺"], "TUR": ["Turquía", "🇹🇷"],
+  "GER": ["Alemania", "🇩🇪"], "CUW": ["Curazao", "🇨🇼"], "CIV": ["Costa de Marfil", "🇨🇮"], "ECU": ["Ecuador", "🇪🇨"],
+  "NED": ["Países Bajos", "🇳🇱"], "JPN": ["Japón", "🇯🇵"], "SWE": ["Suecia", "🇸🇪"], "TUN": ["Túnez", "🇹🇳"],
+  "BEL": ["Bélgica", "🇧🇪"], "EGY": ["Egipto", "🇪🇬"], "IRN": ["Irán", "🇮🇷"], "NZL": ["Nueva Zelanda", "🇳🇿"],
+  "ESP": ["España", "🇪🇸"], "CPV": ["Cabo Verde", "🇨🇻"], "KSA": ["Arabia Saudita", "🇸🇦"], "URU": ["Uruguay", "🇺🇾"],
+  "FRA": ["Francia", "🇫🇷"], "SEN": ["Senegal", "🇸🇳"], "IRQ": ["Irak", "🇮🇶"], "NOR": ["Noruega", "🇳🇴"],
+  "ARG": ["Argentina", "🇦🇷"], "ALG": ["Argelia", "🇩🇿"], "AUT": ["Austria", "🇦🇹"], "JOR": ["Jordania", "🇯🇴"],
+  "POR": ["Portugal", "🇵🇹"], "COD": ["RD Congo", "🇨🇩"], "UZB": ["Uzbekistán", "🇺🇿"], "COL": ["Colombia", "🇨🇴"],
+  "ENG": ["Inglaterra", "🏴󠁧󠁢󠁥󠁮󠁧󠁿"], "CRO": ["Croacia", "🇭🇷"], "GHA": ["Ghana", "🇬🇭"], "PAN": ["Panamá", "🇵🇦"]
+};
+
+const grupos = {
+  "A": ["MEX", "RSA", "KOR", "CZE"],
+  "B": ["CAN", "BIH", "QAT", "SUI"],
+  "C": ["BRA", "MAR", "HAI", "SCO"],
+  "D": ["USA", "PAR", "AUS", "TUR"],
+  "E": ["GER", "CUW", "CIV", "ECU"],
+  "F": ["NED", "JPN", "SWE", "TUN"],
+  "G": ["BEL", "EGY", "IRN", "NZL"],
+  "H": ["ESP", "CPV", "KSA", "URU"],
+  "I": ["FRA", "SEN", "IRQ", "NOR"],
+  "J": ["ARG", "ALG", "AUT", "JOR"],
+  "K": ["POR", "COD", "UZB", "COL"],
+  "L": ["ENG", "CRO", "GHA", "PAN"]
+};
+
+// 72 partidos de fase de grupos - fecha y hora en HORA PARAGUAY (GMT-3)
+const todosPartidosGrupos = [
+  // Jornada 1
+  { id: "m1",  grupo: "A", local: "MEX", visitante: "RSA", fecha: "Jue 11 jun", horaPy: "16:00" },
+  { id: "m2",  grupo: "A", local: "KOR", visitante: "CZE", fecha: "Jue 11 jun", horaPy: "23:00" },
+  { id: "m3",  grupo: "B", local: "CAN", visitante: "BIH", fecha: "Vie 12 jun", horaPy: "16:00" },
+  { id: "m4",  grupo: "D", local: "USA", visitante: "PAR", fecha: "Vie 12 jun", horaPy: "22:00",
+    fechaLarga: "Viernes 12 de junio", horaLocal: "18:00", ciudad: "Los Ángeles", estadio: "SoFi Stadium" },
+  { id: "m5",  grupo: "B", local: "QAT", visitante: "SUI", fecha: "Sáb 13 jun", horaPy: "16:00" },
+  { id: "m6",  grupo: "C", local: "BRA", visitante: "MAR", fecha: "Sáb 13 jun", horaPy: "19:00" },
+  { id: "m7",  grupo: "C", local: "HAI", visitante: "SCO", fecha: "Sáb 13 jun", horaPy: "22:00" },
+  { id: "m8",  grupo: "D", local: "AUS", visitante: "TUR", fecha: "Dom 14 jun", horaPy: "01:00",
+    fechaLarga: "Sábado 13 de junio", horaLocal: "21:00", ciudad: "Vancouver", estadio: "BC Place" },
+  { id: "m9",  grupo: "E", local: "GER", visitante: "CUW", fecha: "Dom 14 jun", horaPy: "14:00" },
+  { id: "m10", grupo: "F", local: "NED", visitante: "JPN", fecha: "Dom 14 jun", horaPy: "17:00" },
+  { id: "m11", grupo: "E", local: "CIV", visitante: "ECU", fecha: "Dom 14 jun", horaPy: "20:00" },
+  { id: "m12", grupo: "F", local: "SWE", visitante: "TUN", fecha: "Dom 14 jun", horaPy: "23:00" },
+  { id: "m13", grupo: "H", local: "ESP", visitante: "CPV", fecha: "Lun 15 jun", horaPy: "13:00" },
+  { id: "m14", grupo: "G", local: "BEL", visitante: "EGY", fecha: "Lun 15 jun", horaPy: "16:00" },
+  { id: "m15", grupo: "H", local: "KSA", visitante: "URU", fecha: "Lun 15 jun", horaPy: "19:00" },
+  { id: "m16", grupo: "G", local: "IRN", visitante: "NZL", fecha: "Lun 15 jun", horaPy: "22:00" },
+  { id: "m17", grupo: "I", local: "FRA", visitante: "SEN", fecha: "Mar 16 jun", horaPy: "16:00" },
+  { id: "m18", grupo: "I", local: "IRQ", visitante: "NOR", fecha: "Mar 16 jun", horaPy: "19:00" },
+  { id: "m19", grupo: "J", local: "ARG", visitante: "ALG", fecha: "Mar 16 jun", horaPy: "22:00" },
+  { id: "m20", grupo: "J", local: "AUT", visitante: "JOR", fecha: "Mié 17 jun", horaPy: "01:00" },
+  { id: "m21", grupo: "K", local: "POR", visitante: "COD", fecha: "Mié 17 jun", horaPy: "14:00" },
+  { id: "m22", grupo: "L", local: "ENG", visitante: "CRO", fecha: "Mié 17 jun", horaPy: "17:00" },
+  { id: "m23", grupo: "L", local: "GHA", visitante: "PAN", fecha: "Mié 17 jun", horaPy: "20:00" },
+  { id: "m24", grupo: "K", local: "UZB", visitante: "COL", fecha: "Mié 17 jun", horaPy: "23:00" },
+  // Jornada 2
+  { id: "m25", grupo: "A", local: "RSA", visitante: "CZE", fecha: "Jue 18 jun", horaPy: "13:00" },
+  { id: "m26", grupo: "B", local: "BIH", visitante: "SUI", fecha: "Jue 18 jun", horaPy: "16:00" },
+  { id: "m27", grupo: "B", local: "CAN", visitante: "QAT", fecha: "Jue 18 jun", horaPy: "19:00" },
+  { id: "m28", grupo: "A", local: "MEX", visitante: "KOR", fecha: "Jue 18 jun", horaPy: "22:00" },
+  { id: "m29", grupo: "D", local: "USA", visitante: "AUS", fecha: "Vie 19 jun", horaPy: "16:00",
+    fechaLarga: "Viernes 19 de junio", horaLocal: "12:00", ciudad: "Seattle", estadio: "Lumen Field" },
+  { id: "m30", grupo: "C", local: "SCO", visitante: "MAR", fecha: "Vie 19 jun", horaPy: "19:00" },
+  { id: "m31", grupo: "C", local: "BRA", visitante: "HAI", fecha: "Vie 19 jun", horaPy: "21:30" },
+  { id: "m32", grupo: "D", local: "TUR", visitante: "PAR", fecha: "Sáb 20 jun", horaPy: "00:00",
+    fechaLarga: "Viernes 19 de junio", horaLocal: "20:00", ciudad: "San Francisco", estadio: "Levi's Stadium" },
+  { id: "m33", grupo: "F", local: "NED", visitante: "SWE", fecha: "Sáb 20 jun", horaPy: "14:00" },
+  { id: "m34", grupo: "E", local: "GER", visitante: "CIV", fecha: "Sáb 20 jun", horaPy: "17:00" },
+  { id: "m35", grupo: "E", local: "ECU", visitante: "CUW", fecha: "Sáb 20 jun", horaPy: "21:00" },
+  { id: "m36", grupo: "F", local: "TUN", visitante: "JPN", fecha: "Dom 21 jun", horaPy: "01:00" },
+  { id: "m37", grupo: "H", local: "ESP", visitante: "KSA", fecha: "Dom 21 jun", horaPy: "13:00" },
+  { id: "m38", grupo: "G", local: "BEL", visitante: "IRN", fecha: "Dom 21 jun", horaPy: "16:00" },
+  { id: "m39", grupo: "H", local: "URU", visitante: "CPV", fecha: "Dom 21 jun", horaPy: "19:00" },
+  { id: "m40", grupo: "G", local: "NZL", visitante: "EGY", fecha: "Dom 21 jun", horaPy: "22:00" },
+  { id: "m41", grupo: "J", local: "ARG", visitante: "AUT", fecha: "Lun 22 jun", horaPy: "14:00" },
+  { id: "m42", grupo: "I", local: "FRA", visitante: "IRQ", fecha: "Lun 22 jun", horaPy: "18:00" },
+  { id: "m43", grupo: "I", local: "NOR", visitante: "SEN", fecha: "Lun 22 jun", horaPy: "21:00" },
+  { id: "m44", grupo: "J", local: "JOR", visitante: "ALG", fecha: "Mar 23 jun", horaPy: "00:00" },
+  { id: "m45", grupo: "K", local: "POR", visitante: "UZB", fecha: "Mar 23 jun", horaPy: "14:00" },
+  { id: "m46", grupo: "L", local: "ENG", visitante: "GHA", fecha: "Mar 23 jun", horaPy: "17:00" },
+  { id: "m47", grupo: "L", local: "PAN", visitante: "CRO", fecha: "Mar 23 jun", horaPy: "20:00" },
+  { id: "m48", grupo: "K", local: "COL", visitante: "COD", fecha: "Mar 23 jun", horaPy: "23:00" },
+  // Jornada 3
+  { id: "m49", grupo: "B", local: "SUI", visitante: "CAN", fecha: "Mié 24 jun", horaPy: "16:00" },
+  { id: "m50", grupo: "B", local: "BIH", visitante: "QAT", fecha: "Mié 24 jun", horaPy: "16:00" },
+  { id: "m51", grupo: "C", local: "SCO", visitante: "BRA", fecha: "Mié 24 jun", horaPy: "19:00" },
+  { id: "m52", grupo: "C", local: "MAR", visitante: "HAI", fecha: "Mié 24 jun", horaPy: "19:00" },
+  { id: "m53", grupo: "A", local: "CZE", visitante: "MEX", fecha: "Mié 24 jun", horaPy: "22:00" },
+  { id: "m54", grupo: "A", local: "RSA", visitante: "KOR", fecha: "Mié 24 jun", horaPy: "22:00" },
+  { id: "m55", grupo: "E", local: "ECU", visitante: "GER", fecha: "Jue 25 jun", horaPy: "17:00" },
+  { id: "m56", grupo: "E", local: "CUW", visitante: "CIV", fecha: "Jue 25 jun", horaPy: "17:00" },
+  { id: "m57", grupo: "F", local: "TUN", visitante: "NED", fecha: "Jue 25 jun", horaPy: "20:00" },
+  { id: "m58", grupo: "F", local: "JPN", visitante: "SWE", fecha: "Jue 25 jun", horaPy: "20:00" },
+  { id: "m59", grupo: "D", local: "TUR", visitante: "USA", fecha: "Jue 25 jun", horaPy: "23:00",
+    fechaLarga: "Jueves 25 de junio", horaLocal: "19:00", ciudad: "Los Ángeles", estadio: "SoFi Stadium" },
+  { id: "m60", grupo: "D", local: "PAR", visitante: "AUS", fecha: "Jue 25 jun", horaPy: "23:00",
+    fechaLarga: "Jueves 25 de junio", horaLocal: "19:00", ciudad: "San Francisco", estadio: "Levi's Stadium" },
+  { id: "m61", grupo: "I", local: "NOR", visitante: "FRA", fecha: "Vie 26 jun", horaPy: "16:00" },
+  { id: "m62", grupo: "I", local: "SEN", visitante: "IRQ", fecha: "Vie 26 jun", horaPy: "16:00" },
+  { id: "m63", grupo: "H", local: "URU", visitante: "ESP", fecha: "Vie 26 jun", horaPy: "21:00" },
+  { id: "m64", grupo: "H", local: "CPV", visitante: "KSA", fecha: "Vie 26 jun", horaPy: "21:00" },
+  { id: "m65", grupo: "G", local: "NZL", visitante: "BEL", fecha: "Sáb 27 jun", horaPy: "00:00" },
+  { id: "m66", grupo: "G", local: "EGY", visitante: "IRN", fecha: "Sáb 27 jun", horaPy: "00:00" },
+  { id: "m67", grupo: "L", local: "PAN", visitante: "ENG", fecha: "Sáb 27 jun", horaPy: "18:00" },
+  { id: "m68", grupo: "L", local: "CRO", visitante: "GHA", fecha: "Sáb 27 jun", horaPy: "18:00" },
+  { id: "m69", grupo: "K", local: "COL", visitante: "POR", fecha: "Sáb 27 jun", horaPy: "20:30" },
+  { id: "m70", grupo: "K", local: "COD", visitante: "UZB", fecha: "Sáb 27 jun", horaPy: "20:30" },
+  { id: "m71", grupo: "J", local: "JOR", visitante: "ARG", fecha: "Sáb 27 jun", horaPy: "23:00" },
+  { id: "m72", grupo: "J", local: "ALG", visitante: "AUT", fecha: "Sáb 27 jun", horaPy: "23:00" }
+];
+
+const partidosGrupoD = todosPartidosGrupos.filter(p => p.grupo === "D");
+
+// Eliminatorias - cuadro oficial FIFA 2026 (16avos = ronda de 32)
+// "tercero": grupos posibles del mejor tercero que ocupa esa llave
+const eliminatorias = [
+  { id: "m73",  ronda: "16avos", local: "2A", visitante: "2B" },
+  { id: "m74",  ronda: "16avos", local: "1E", tercero: ["A","B","C","D","F"] },
+  { id: "m75",  ronda: "16avos", local: "1F", visitante: "2C" },
+  { id: "m76",  ronda: "16avos", local: "1C", visitante: "2F" },
+  { id: "m77",  ronda: "16avos", local: "1I", tercero: ["C","D","F","G","H"] },
+  { id: "m78",  ronda: "16avos", local: "2E", visitante: "2I" },
+  { id: "m79",  ronda: "16avos", local: "1A", tercero: ["C","E","F","H","I"] },
+  { id: "m80",  ronda: "16avos", local: "1L", tercero: ["E","H","I","J","K"] },
+  { id: "m81",  ronda: "16avos", local: "1D", tercero: ["B","E","F","I","J"] },
   { id: "m82",  ronda: "16avos", local: "1G", tercero: ["A","E","H","I","J"] },
   { id: "m83",  ronda: "16avos", local: "2K", visitante: "2L" },
   { id: "m84",  ronda: "16avos", local: "1H", visitante: "2J" },
