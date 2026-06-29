@@ -371,6 +371,149 @@ main {
   border-color: #003087;
 }
 
+.actions-bar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+
+.actions-bar button {
+  background: white;
+  color: #003087;
+  border: 2px solid #003087;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.actions-bar button:hover {
+  background: #003087;
+  color: white;
+}
+
+.actions-bar button.danger {
+  color: #d52b1e;
+  border-color: #d52b1e;
+}
+
+.actions-bar button.danger:hover {
+  background: #d52b1e;
+  color: white;
+}
+
+.modal-bg {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-bg.act {
+  display: flex;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.modal h3 {
+  margin: 0 0 12px 0;
+  color: #003087;
+}
+
+.modal .help {
+  background: #f5f5f0;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.modal .help code {
+  background: white;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+.modal textarea {
+  width: 100%;
+  min-height: 200px;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  justify-content: flex-end;
+}
+
+.modal-actions button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.modal-actions .primary {
+  background: #003087;
+  color: white;
+}
+
+.modal-actions .secondary {
+  background: #eee;
+  color: #333;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #003087;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  z-index: 2000;
+  display: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.toast.act {
+  display: block;
+  animation: fadeInOut 3s;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, 10px); }
+  10%, 90% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, 10px); }
+}
+
 /* Eliminatorias */
 .ronda {
   margin-bottom: 30px;
@@ -393,20 +536,42 @@ main {
 .elim-partido {
   background: white;
   border-radius: 10px;
-  padding: 12px;
+  padding: 10px 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-.elim-equipo {
-  display: flex;
+.elim-header {
+  font-size: 0.7rem;
+  color: #666;
+  font-weight: 700;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.elim-fila {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto 1fr;
   align-items: center;
-  gap: 10px;
-  padding: 10px;
-  margin: 5px 0;
+  gap: 6px;
+}
+
+.elim-equipo {
+  padding: 6px 8px;
   background: #f5f5f0;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
+  font-size: 0.85rem;
+  min-height: 18px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.elim-equipo:first-of-type {
+  justify-content: flex-end;
+  text-align: right;
 }
 
 .elim-equipo:hover {
@@ -416,6 +581,38 @@ main {
 .elim-equipo.seleccionado {
   background: #003087;
   color: white;
+  font-weight: 600;
+}
+
+.elim-equipo.indef {
+  color: #999;
+  font-size: 0.75rem;
+  font-style: italic;
+  cursor: default;
+}
+
+.elim-equipo.indef:hover {
+  background: #f5f5f0;
+}
+
+.elim-score-input {
+  width: 32px;
+  padding: 4px;
+  text-align: center;
+  border: 1.5px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.elim-score-input:focus {
+  border-color: #003087;
+  outline: none;
+}
+
+.elim-score-sep {
+  color: #666;
+  font-weight: 600;
 }
 
 .campeon-box {
@@ -483,7 +680,7 @@ footer {
   <button class="reset" id="btnReset">🔄 Reiniciar todo</button>
 </nav>
 
-<div class="estado" id="estado">🇵🇾 Completá los resultados · Horarios en HORA PARAGUAY (GMT-3)</div>
+<div class="estado" id="estado">🇵🇾 Completá los resultados · Horarios en HORA PARAGUAY (GMT-3)<br><span style="font-size:0.7rem;opacity:0.7;">Actualizado: 29 jun 2026 · Último resultado oficial: Sudáfrica 0-1 Canadá (16avos)</span></div>
 
 <main>
   <section id="calendario" class="vista act">
@@ -525,6 +722,10 @@ footer {
   <p>🇵🇾 Mundial 2026 - Predictor Paraguay | Hora oficial Paraguay (GMT-3)</p>
   <p>📌 Diferencia: Paraguay está 4 horas ADELANTE de Los Ángeles (ej: 22:00 PY = 18:00 LA)</p>
 </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
 // ==================== DATOS ====================
@@ -700,7 +901,9 @@ const RESULTADOS_OFICIALES = {
   m49:[2,1], m50:[3,1], m51:[0,3], m52:[4,2], m53:[0,3], m54:[1,0],
   m55:[2,1], m56:[0,2], m57:[1,3], m58:[1,1], m59:[3,2], m60:[0,0],
   m61:[1,4], m62:[5,0], m63:[0,1], m64:[0,0], m65:[1,5], m66:[1,1],
-  m67:[0,2], m68:[2,1], m69:[0,0], m70:[3,1], m71:[1,3], m72:[3,3]
+  m67:[0,2], m68:[2,1], m69:[0,0], m70:[3,1], m71:[1,3], m72:[3,3],
+  // 16avos de final
+  m73:[0,1]  // Sudáfrica 0 - Canadá 1 (28 jun)
 };
 
 let state = { scores: {}, picks: {} };
@@ -720,6 +923,136 @@ function saveState() {
 }
 
 saveState();
+
+// ==================== AUTO-SINCRONIZACIÓN ====================
+// Mapeo de códigos FIFA a IDs internos para parsear respuestas de APIs externas
+const _fifaToCode = {};
+Object.keys(equipos).forEach(c => { _fifaToCode[c] = c; });
+
+// Aliases comunes en APIs internacionales (en inglés)
+const _aliasesAPI = {
+  "south africa": "RSA", "south korea": "KOR", "czechia": "CZE", "czech republic": "CZE",
+  "mexico": "MEX", "canada": "CAN", "bosnia": "BIH", "bosnia and herzegovina": "BIH",
+  "qatar": "QAT", "switzerland": "SUI", "brazil": "BRA", "morocco": "MAR",
+  "haiti": "HAI", "scotland": "SCO", "united states": "USA", "usa": "USA",
+  "paraguay": "PAR", "australia": "AUS", "turkey": "TUR", "türkiye": "TUR",
+  "germany": "GER", "curacao": "CUW", "curaçao": "CUW", "ivory coast": "CIV", "côte d'ivoire": "CIV",
+  "ecuador": "ECU", "netherlands": "NED", "japan": "JPN", "sweden": "SWE", "tunisia": "TUN",
+  "belgium": "BEL", "egypt": "EGY", "iran": "IRN", "new zealand": "NZL",
+  "spain": "ESP", "cape verde": "CPV", "cabo verde": "CPV", "saudi arabia": "KSA", "uruguay": "URU",
+  "france": "FRA", "senegal": "SEN", "iraq": "IRQ", "norway": "NOR",
+  "argentina": "ARG", "algeria": "ALG", "austria": "AUT", "jordan": "JOR",
+  "portugal": "POR", "dr congo": "COD", "democratic republic of the congo": "COD", "congo dr": "COD",
+  "uzbekistan": "UZB", "colombia": "COL",
+  "england": "ENG", "croatia": "CRO", "ghana": "GHA", "panama": "PAN"
+};
+
+function _apiNombreAEquipo(nombre) {
+  if (!nombre) return null;
+  const n = nombre.toLowerCase().trim();
+  if (_aliasesAPI[n]) return _aliasesAPI[n];
+  // También probar normalizado (sin acentos)
+  const sinAcentos = n.normalize("NFD").replace(/[̀-ͯ]/g, "");
+  return _aliasesAPI[sinAcentos] || null;
+}
+
+async function sincronizarConAPI(silent = true) {
+  try {
+    // Intentar varias APIs en orden
+    const fuentes = [
+      "https://worldcup26.ir/get/games",
+      "https://corsproxy.io/?https%3A%2F%2Fworldcup26.ir%2Fget%2Fgames"
+    ];
+
+    let datos = null;
+    let teams = null;
+
+    for (const url of fuentes) {
+      try {
+        const resp = await fetch(url, { method: "GET" });
+        if (!resp.ok) continue;
+        datos = await resp.json();
+        if (datos) break;
+      } catch(e) { continue; }
+    }
+
+    if (!datos || !Array.isArray(datos)) {
+      if (!silent && typeof mostrarToast === "function") mostrarToast("⚠️ No se pudo conectar a la API");
+      return false;
+    }
+
+    // Cargar también teams para resolver IDs
+    try {
+      const respT = await fetch("https://worldcup26.ir/get/teams");
+      if (respT.ok) teams = await respT.json();
+    } catch(e) {}
+
+    const teamIdToCode = {};
+    if (Array.isArray(teams)) {
+      teams.forEach(t => {
+        if (t.id && t.fifa_code) teamIdToCode[String(t.id)] = t.fifa_code;
+      });
+    }
+
+    let aplicados = 0;
+    datos.forEach(partido => {
+      const finished = partido.finished === true || partido.finished === "true" || partido.status === "finished";
+      if (!finished) return;
+
+      // Resolver equipos
+      let homeCode = teamIdToCode[String(partido.home_team_id)] || _apiNombreAEquipo(partido.home_team || partido.homeTeam || "");
+      let awayCode = teamIdToCode[String(partido.away_team_id)] || _apiNombreAEquipo(partido.away_team || partido.awayTeam || "");
+      if (!homeCode || !awayCode) return;
+
+      const homeScore = parseInt(partido.home_score ?? partido.homeScore);
+      const awayScore = parseInt(partido.away_score ?? partido.awayScore);
+      if (isNaN(homeScore) || isNaN(awayScore)) return;
+
+      // Buscar el partido correspondiente
+      const todosPart = [...todosPartidosGrupos, ...eliminatorias];
+      const match = todosPart.find(p =>
+        (p.local === homeCode && p.visitante === awayCode) ||
+        (p.local === awayCode && p.visitante === homeCode)
+      );
+
+      if (match) {
+        const score = match.local === homeCode ? [homeScore, awayScore] : [awayScore, homeScore];
+        const actual = state.scores[match.id];
+        if (!actual || actual[0] !== score[0] || actual[1] !== score[1]) {
+          state.scores[match.id] = score;
+          aplicados++;
+        }
+      }
+    });
+
+    if (aplicados > 0) {
+      saveState();
+      if (typeof renderAll === "function") renderAll();
+      if (!silent && typeof mostrarToast === "function") {
+        mostrarToast("🔄 " + aplicados + " resultado(s) actualizado(s)");
+      }
+    } else if (!silent && typeof mostrarToast === "function") {
+      mostrarToast("✅ Ya está al día");
+    }
+
+    state.ultimaSync = new Date().toISOString();
+    saveState();
+    return true;
+  } catch(e) {
+    if (!silent && typeof mostrarToast === "function") mostrarToast("⚠️ Error al sincronizar");
+    return false;
+  }
+}
+
+// Sincronizar automáticamente al cargar (silencioso)
+// Solo si la última sincronización fue hace más de 10 minutos
+function autoSyncSiCorresponde() {
+  const ahora = Date.now();
+  const ultima = state.ultimaSync ? new Date(state.ultimaSync).getTime() : 0;
+  if (ahora - ultima > 10 * 60 * 1000) {
+    sincronizarConAPI(true);
+  }
+}
 
 // ==================== LÓGICA ====================
 function calcularTablaGrupo(grupo) {
@@ -844,14 +1177,34 @@ function calcularTerceros() {
 
 function resolverEquipo(ref, terceros) {
   if (!ref) return null;
-  if (ref.startsWith("W")) return state.picks[ref.substring(1)] || null;
+  if (ref.startsWith("W")) {
+    const matchId = ref.substring(1);
+    // Si hay pick manual, usarlo
+    if (state.picks[matchId]) return state.picks[matchId];
+    // Si no, determinar ganador automáticamente desde el score
+    const m = eliminatorias.find(x => x.id === matchId);
+    if (!m) return null;
+    const score = state.scores[matchId];
+    if (score && score[0] != null && score[1] != null && score[0] !== score[1]) {
+      const [a, b] = equiposDePartido(m, terceros);
+      if (!a || !b) return null;
+      return score[0] > score[1] ? a : b;
+    }
+    return null;
+  }
   if (ref.startsWith("L")) {
     const m = eliminatorias.find(x => x.id === ref.substring(1));
     if (!m) return null;
     const [a, b] = equiposDePartido(m, terceros);
-    const w = state.picks[m.id];
-    if (!w || !a || !b) return null;
-    return w === a ? b : a;
+    if (!a || !b) return null;
+    // Primero verificar pick manual
+    if (state.picks[m.id]) return state.picks[m.id] === a ? b : a;
+    // Si no, perdedor automático desde el score
+    const score = state.scores[m.id];
+    if (score && score[0] != null && score[1] != null && score[0] !== score[1]) {
+      return score[0] > score[1] ? b : a;
+    }
+    return null;
   }
   if (ref.length >= 2 && ref[0] >= '1' && ref[0] <= '9') {
     const grupo = ref[1];
@@ -870,10 +1223,23 @@ function equiposDePartido(elim, terceros) {
   return [localEq, visitEq];
 }
 
+function getPartidoEnRonda(matchId) {
+  const p = eliminatorias.find(e => e.id === matchId);
+  if (!p) return null;
+  const partidosRonda = eliminatorias.filter(e => e.ronda === p.ronda);
+  return partidosRonda.indexOf(p) + 1;
+}
+
 function etiquetaRef(ref) {
   if (!ref) return "Por definir";
-  if (ref.startsWith("W")) return "Por definir";
-  if (ref.startsWith("L")) return "Perdedor semifinal";
+  if (ref.startsWith("W")) {
+    const idx = getPartidoEnRonda(ref.substring(1));
+    return idx ? `Ganador P${idx}` : "Por definir";
+  }
+  if (ref.startsWith("L")) {
+    const idx = getPartidoEnRonda(ref.substring(1));
+    return idx ? `Perdedor P${idx}` : "Por definir";
+  }
   if (ref[0] === "1") return `1° Grupo ${ref[1]}`;
   if (ref[0] === "2") return `2° Grupo ${ref[1]}`;
   return "Por definir";
@@ -1028,17 +1394,31 @@ function renderEliminatorias() {
       <div class="ronda">
         <h3>${nombre}</h3>
         <div class="eliminatorias-grid">
-          ${partidos.map(elim => {
+          ${partidos.map((elim, idx) => {
             const [localEq, visitEq] = equiposDePartido(elim, terceros);
-            const ganador = state.picks[elim.id];
+            const score = state.scores[elim.id] || [null, null];
+            let ganador = state.picks[elim.id];
+            if (!ganador && score[0] != null && score[1] != null && score[0] !== score[1] && localEq && visitEq) {
+              ganador = score[0] > score[1] ? localEq : visitEq;
+            }
             const labelVisit = elim.tercero ? `Mejor 3° (${elim.tercero.join("/")})` : etiquetaRef(elim.visitante);
+            const numPartido = idx + 1;
+            const headerLabel = nombre === "Final" ? "FINAL" : (nombre === "Tercer Puesto" ? "3° PUESTO" : `${nombre.toUpperCase()} · PARTIDO ${numPartido}`);
+            const localHTML = localEq
+              ? `<div class="elim-equipo ${ganador === localEq ? 'seleccionado' : ''}" data-partido="${elim.id}" data-equipo="${localEq}">${(equipos[localEq]?.[1] || "🏁")} ${equipos[localEq]?.[0] || localEq}</div>`
+              : `<div class="elim-equipo indef">${etiquetaRef(elim.local)}</div>`;
+            const visitHTML = visitEq
+              ? `<div class="elim-equipo ${ganador === visitEq ? 'seleccionado' : ''}" data-partido="${elim.id}" data-equipo="${visitEq}">${(equipos[visitEq]?.[1] || "🏁")} ${equipos[visitEq]?.[0] || visitEq}</div>`
+              : `<div class="elim-equipo indef">${labelVisit}</div>`;
             return `
               <div class="elim-partido">
-                <div class="elim-equipo ${ganador && ganador === localEq ? 'seleccionado' : ''}" data-partido="${elim.id}" data-equipo="${localEq || ''}">
-                  ${localEq ? (equipos[localEq]?.[1] || "🏁") + " " + (equipos[localEq]?.[0] || localEq) : "❓ " + etiquetaRef(elim.local)}
-                </div>
-                <div class="elim-equipo ${ganador && ganador === visitEq ? 'seleccionado' : ''}" data-partido="${elim.id}" data-equipo="${visitEq || ''}">
-                  ${visitEq ? (equipos[visitEq]?.[1] || "🏁") + " " + (equipos[visitEq]?.[0] || visitEq) : "❓ " + labelVisit}
+                <div class="elim-header">${headerLabel}</div>
+                <div class="elim-fila">
+                  ${localHTML}
+                  <input type="number" class="elim-score-input" min="0" max="20" data-partido="${elim.id}" data-eslocal="1" value="${score[0] ?? ''}">
+                  <span class="elim-score-sep">-</span>
+                  <input type="number" class="elim-score-input" min="0" max="20" data-partido="${elim.id}" data-eslocal="0" value="${score[1] ?? ''}">
+                  ${visitHTML}
                 </div>
               </div>
             `;
@@ -1056,9 +1436,11 @@ function renderEliminatorias() {
       if (state.picks[partidoId] === equipo) delete state.picks[partidoId];
       else state.picks[partidoId] = equipo;
       saveState();
-      renderEliminatorias();
+      renderAll();
     });
   });
+
+  attachScoreListeners(container);
 
   const campeon = state.picks["final"];
   const campeonBox = document.getElementById("campeonBox");
@@ -1095,8 +1477,122 @@ document.getElementById("btnReset").addEventListener("click", () => {
   }
 });
 
+// ==================== IMPORT / EXPORT ====================
+function mostrarToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("act");
+  setTimeout(() => t.classList.remove("act"), 3000);
+}
+
+// Construir índice de equipos para parser (códigos + nombres normalizados)
+function _normalizar(s) {
+  return s.toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]/g, "");
+}
+
+const _equiposIndex = {};
+Object.keys(equipos).forEach(cod => {
+  _equiposIndex[cod.toLowerCase()] = cod;
+  _equiposIndex[_normalizar(equipos[cod][0])] = cod;
+});
+
+function buscarEquipoPorNombre(nombre) {
+  return _equiposIndex[_normalizar(nombre)] || null;
+}
+
+function buscarPartido(eq1, eq2) {
+  const todos = [...todosPartidosGrupos, ...eliminatorias];
+  return todos.find(p =>
+    (p.local === eq1 && p.visitante === eq2) ||
+    (p.local === eq2 && p.visitante === eq1)
+  );
+}
+
+// Parsea una línea y devuelve {partidoId, score} o null
+function parsearLinea(linea) {
+  linea = linea.trim();
+  if (!linea) return null;
+
+  // Formato 1: "m45 5-0" o "m45 5 0" o "final 2-1"
+  let m = linea.match(/^(m\d+|final)\s+(\d+)\s*[-:]\s*(\d+)/i);
+  if (m) {
+    const id = m[1].toLowerCase();
+    return { partidoId: id, score: [parseInt(m[2]), parseInt(m[3])] };
+  }
+
+  // Formato 2: "Equipo1 X-Y Equipo2"
+  m = linea.match(/^(.+?)\s+(\d+)\s*[-:]\s*(\d+)\s+(.+)$/);
+  if (m) {
+    const eq1 = buscarEquipoPorNombre(m[1].trim());
+    const eq2 = buscarEquipoPorNombre(m[4].trim());
+    if (eq1 && eq2) {
+      const partido = buscarPartido(eq1, eq2);
+      if (partido) {
+        // Determinar orden local/visitante
+        const score = partido.local === eq1
+          ? [parseInt(m[2]), parseInt(m[3])]
+          : [parseInt(m[3]), parseInt(m[2])];
+        return { partidoId: partido.id, score };
+      }
+    }
+  }
+
+  return null;
+}
+
+function aplicarImport(texto) {
+  const lineas = texto.split(/\n/);
+  let aplicados = 0, ignorados = 0;
+  const errores = [];
+
+  lineas.forEach(linea => {
+    if (!linea.trim()) return;
+    const res = parsearLinea(linea);
+    if (res) {
+      state.scores[res.partidoId] = res.score;
+      aplicados++;
+    } else {
+      ignorados++;
+      errores.push(linea.trim().substring(0, 40));
+    }
+  });
+
+  saveState();
+  renderAll();
+
+  let msg = "✅ " + aplicados + " resultado(s) aplicado(s)";
+  if (ignorados > 0) msg += " · ⚠️ " + ignorados + " no reconocido(s)";
+  mostrarToast(msg);
+}
+
+function exportarResultados() {
+  const lineas = [];
+  // Partidos de grupos
+  todosPartidosGrupos.forEach(p => {
+    const s = state.scores[p.id];
+    if (s && s[0] != null && s[1] != null) {
+      lineas.push(p.id + " " + s[0] + "-" + s[1] + "  // " +
+        equipos[p.local][0] + " vs " + equipos[p.visitante][0]);
+    }
+  });
+  // Eliminatorias con resultado
+  eliminatorias.forEach(e => {
+    const s = state.scores[e.id];
+    if (s && s[0] != null && s[1] != null) {
+      lineas.push(e.id + " " + s[0] + "-" + s[1] + "  // " + e.ronda);
+    }
+  });
+  return lineas.join("\n");
+}
+
+// Listeners
 // Inicializar
 renderAll();
+
+// Auto-sincronización al cargar (silencioso, no bloqueante) - SIEMPRE
+setTimeout(() => sincronizarConAPI(true), 1000);
 </script>
 </body>
 </html>
