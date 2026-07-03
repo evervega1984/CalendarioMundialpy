@@ -926,7 +926,6 @@ const RESULTADOS_OFICIALES = {
   m81:[2,0],  // Estados Unidos 2 - Bosnia 0
   m82:[3,2]   // Bélgica 3 - Senegal 2 (tiempo extra)
 };
-
 // Penales para partidos definidos en tanda
 const PENALES_OFICIALES = {
   m74: [3, 4],  // Alemania 3 - Paraguay 4
@@ -940,7 +939,6 @@ const PICKS_OFICIALES = {
 };
 
 let state = { scores: {}, picks: {} };
-
 try {
   const saved = localStorage.getItem("mundial2026_py_v2");
   if (saved) state = JSON.parse(saved);
@@ -990,7 +988,6 @@ const _aliasesAPI = {
   "uzbekistan": "UZB", "colombia": "COL",
   "england": "ENG", "croatia": "CRO", "ghana": "GHA", "panama": "PAN"
 };
-
 function _apiNombreAEquipo(nombre) {
   if (!nombre) return null;
   const n = nombre.toLowerCase().trim();
@@ -1142,7 +1139,6 @@ function calcularTablaGrupo(grupo) {
   }
 
   const arr = Object.values(tabla);
-
   // Criterios FIFA: 1) Pts | 2-4) H2H (pts, DG, GF entre empatados) | 5) DG general | 6) GF general
   arr.sort((a, b) => {
     if (a.pts !== b.pts) return b.pts - a.pts;
