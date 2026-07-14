@@ -692,7 +692,7 @@ footer {
   <button class="reset" id="btnReset">🔄 Reiniciar todo</button>
 </nav>
 
-<div class="estado" id="estado">🇵🇾 Completá los resultados · Horarios en HORA PARAGUAY (GMT-3)<br><span style="font-size:0.7rem;opacity:0.7;">Actualizado: 1 jul 2026 · Últimos: FRA 3-0 SWE · MEX 2-0 ECU · ENG 2-1 COD · BEL 3-2 SEN (ET) · USA 2-0 BIH</span></div>
+<div class="estado" id="estado">🇵🇾 Completá los resultados · Horarios en HORA PARAGUAY (GMT-3)<br><span style="font-size:0.7rem;opacity:0.7;">Actualizado: 11 jul 2026 · Últimos: FRA 2-0 MAR · ESP 2-1 BEL · NOR 1-2 ENG · ARG 3-1 SUI</span></div>
 
 <main>
   <section id="calendario" class="vista act">
@@ -924,19 +924,43 @@ const RESULTADOS_OFICIALES = {
   m79:[2,0],  // México 2 - Ecuador 0
   m80:[2,1],  // Inglaterra 2 - RD Congo 1
   m81:[2,0],  // Estados Unidos 2 - Bosnia 0
-  m82:[3,2]   // Bélgica 3 - Senegal 2 (tiempo extra)
+  m82:[3,2],  // Bélgica 3 - Senegal 2 (tiempo extra)
+  m83:[2,1],  // Portugal 2 - Croacia 1
+  m84:[3,0],  // España 3 - Austria 0
+  m85:[2,0],  // Suiza 2 - Argelia 0
+  m86:[3,2],  // Argentina 3 - Cabo Verde 2
+  m87:[1,0],  // Colombia 1 - Ghana 0
+  m88:[1,1],  // Australia 1(2) - Egipto 1(4) [PEN]
+  // Octavos de final
+  m89:[0,1],  // Paraguay 0 - Francia 1
+  m90:[0,3],  // Canadá 0 - Marruecos 3
+  m91:[1,2],  // Brasil 1 - Noruega 2
+  m92:[2,3],  // México 2 - Inglaterra 3
+  m93:[0,1],  // Portugal 0 - España 1
+  m94:[1,4],  // Estados Unidos 1 - Bélgica 4
+  m95:[3,2],  // Argentina 3 - Egipto 2
+  m96:[0,0],  // Suiza 0(4) - Colombia 0(3) [PEN]
+  // Cuartos de final
+  m97:[2,0],  // Francia 2 - Marruecos 0
+  m98:[2,1],  // España 2 - Bélgica 1
+  m99:[1,2],  // Noruega 1 - Inglaterra 2
+  m100:[3,1]  // Argentina 3 - Suiza 1
 };
 
 // Penales para partidos definidos en tanda
 const PENALES_OFICIALES = {
   m74: [3, 4],  // Alemania 3 - Paraguay 4
-  m75: [2, 3]   // Países Bajos 2 - Marruecos 3
+  m75: [2, 3],  // Países Bajos 2 - Marruecos 3
+  m88: [2, 4],  // Australia 2 - Egipto 4
+  m96: [4, 3]   // Suiza 4 - Colombia 3
 };
 
 // Ganadores oficiales para partidos definidos en penales (override del score)
 const PICKS_OFICIALES = {
   m74: "PAR",
-  m75: "MAR"
+  m75: "MAR",
+  m88: "EGY",
+  m96: "SUI"
 };
 
 let state = { scores: {}, picks: {} };
